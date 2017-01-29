@@ -3,7 +3,6 @@ layout: post
 title: 'Serverless Meetup Tokyo #2'
 description: >
   Serverless Meetup lần thứ 2 được tổ chức Tokyo Nhật Bản
-  <a target="_blank" href="https://serverless.connpass.com/event/44308/">https://serverless.connpass.com/event/44308/</a>
 tags: [serverless, meetup]
 categories: [serverless, meetup]
 date:   2017-01-19 22:10
