@@ -1,0 +1,18 @@
+language: ruby
+rvm:
+ - 2.3.1p112
+ - jruby
+ - rbx-2
+
+branches:
+  only:
+  - master
+cache:
+  directories:
+    - node_modules
+    - vendor/bundle
+
+install:
+  - bundle
+
+script: jgd -u git@github.com:nooptr/nooptr.github.io.git -b feature
