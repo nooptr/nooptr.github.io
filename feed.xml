@@ -1,5 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="https://nooptr.github.io/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.1">Jekyll</generator><link href="https://nooptr.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://nooptr.github.io/" rel="alternate" type="text/html" /><updated>2017-01-29T16:48:34+09:00</updated><id>https://nooptr.github.io//</id><title type="html">Tech Blog</title><subtitle>Blog chia sẻ những kinh nghiệm và kiến thức về lập trình, những hiểu biết để xây dựng một hệ thống hoàn hảo!
-</subtitle><author><name>Nooptr</name></author><entry><title type="html">10 kĩ thuật nên biết khi phát triển web</title><link href="https://nooptr.github.io/2017/01/20/10-web-technology.html" rel="alternate" type="text/html" title="10 kĩ thuật nên biết khi phát triển web" /><published>2017-01-20T18:10:00+09:00</published><updated>2017-01-20T18:10:00+09:00</updated><id>https://nooptr.github.io/2017/01/20/10-web-technology</id><content type="html" xml:base="https://nooptr.github.io/2017/01/20/10-web-technology.html">&lt;p&gt;Trong những năm gần đây thì nhiều kĩ thuật mới được ra đời, kéo theo việc xây dựng trang web cũng trở nên dễ dàng hơn.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Tech Blog</title>
+		<description>Stylish Jekyll Theme</description>
+		<link>/</link>
+		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>10 kĩ thuật nên biết khi phát triển web</title>
+				<description>&lt;p&gt;Trong những năm gần đây thì nhiều kĩ thuật mới được ra đời, kéo theo việc xây dựng trang web cũng trở nên dễ dàng hơn.&lt;/p&gt;
 
 &lt;h2 id=&quot;web-components&quot;&gt;1. Web Components&lt;/h2&gt;
 
@@ -116,7 +125,17 @@ Motion UI: &lt;a href=&quot;http://zurb.com/playground/motion-ui&quot;&gt;http:/
   &lt;li&gt;Tính năng reload trình duyệt, HTTP server, CSS module, website có tính responsive&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Google Web Starter Kit:  &lt;a href=&quot;https://developers.google.com/web/tools/starter-kit/&quot;&gt;https://developers.google.com/web/tools/starter-kit/&lt;/a&gt;&lt;/p&gt;</content><author><name>Nooptr</name></author><category term="web" /><summary type="html">Trong những năm gần đây thì nhiều kĩ thuật mới được ra đời, kéo theo việc xây dựng trang web cũng trở nên dễ dàng hơn.</summary></entry><entry><title type="html">Serverless Meetup Tokyo #2</title><link href="https://nooptr.github.io/2017/01/19/serverless-meetup-tokyo-2.html" rel="alternate" type="text/html" title="Serverless Meetup Tokyo #2" /><published>2017-01-19T22:10:00+09:00</published><updated>2017-01-19T22:10:00+09:00</updated><id>https://nooptr.github.io/2017/01/19/serverless-meetup-tokyo-2</id><content type="html" xml:base="https://nooptr.github.io/2017/01/19/serverless-meetup-tokyo-2.html">&lt;p&gt;Serverless Meetup là gì?&lt;/p&gt;
+&lt;p&gt;Google Web Starter Kit:  &lt;a href=&quot;https://developers.google.com/web/tools/starter-kit/&quot;&gt;https://developers.google.com/web/tools/starter-kit/&lt;/a&gt;&lt;/p&gt;
+
+</description>
+				<pubDate>Fri, 20 Jan 2017 18:10:00 +0900</pubDate>
+				<link>/web/design/2017/01/20/10-web-technology.html</link>
+				<guid isPermaLink="true">/web/design/2017/01/20/10-web-technology.html</guid>
+			</item>
+		
+			<item>
+				<title>Serverless Meetup Tokyo #2</title>
+				<description>&lt;p&gt;Serverless Meetup là gì?&lt;/p&gt;
 
 &lt;p&gt;Serverless Meetup là một trong những Community về IT để trao đổi ý kiến, kinh nghiệm của bản thân về  Serverless Architecture - đang được vận hành trên 40 quốc gia trên thế giới. Ở trong những buổi meetup này, thì có rất nhiều những kĩ sư khá giỏi của các công ty lớn như Amazon, Microsoft … lên trình bày.&lt;/p&gt;
 
@@ -202,4 +221,12 @@ Bên nhật rất thường hay tổ chức những buổi Meetup kiểu như n�
 
 &lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/l8pUhx0Q3eE58o&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/ssuserb2e85a/seoapi-gatewaylambda&quot; title=&quot;SEO対策したサイトをAPI Gateway+Lambdaで作った話&quot; target=&quot;_blank&quot;&gt;SEO対策したサイトをAPI Gateway+Lambdaで作った話&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.slideshare.net/ssuserb2e85a&quot;&gt;Takahiro Hirata&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
 
-&lt;/div&gt;</content><author><name>Nooptr</name></author><category term="serverless meetup" /><summary type="html">Serverless Meetup là gì?</summary></entry></feed>
+&lt;/div&gt;
+</description>
+				<pubDate>Thu, 19 Jan 2017 22:10:00 +0900</pubDate>
+				<link>/serverless/meetup/2017/01/19/serverless-meetup-tokyo-2.html</link>
+				<guid isPermaLink="true">/serverless/meetup/2017/01/19/serverless-meetup-tokyo-2.html</guid>
+			</item>
+		
+	</channel>
+</rss>
