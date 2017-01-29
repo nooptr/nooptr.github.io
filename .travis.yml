@@ -15,4 +15,4 @@ cache:
 install:
   - bundle
 
-script: jgd -u git@github.com:nooptr/nooptr.github.io.git -b feature
+script: jgd -u git@github.com:nooptr/nooptr.github.io.git -r feature -b master
