@@ -42,17 +42,17 @@ Vì tài liệu toàn bằng tiếng nhật nên mọi người thông cảm nh�
 
 #### 1. Opening: 2017年Serverless化していく世界の概況
 
-<a target="_blank" href="http://www.slideshare.net/YoshidaShingo/welcometoserverlessmeetuptokyo2">http://www.slideshare.net/YoshidaShingo/welcometoserverlessmeetuptokyo2</a>
+{% oembed http://www.slideshare.net/YoshidaShingo/welcometoserverlessmeetuptokyo2 %}
 
 
 #### 2. Tune Up AWS Lambda
 
-<a target="_blank" href="http://www.slideshare.net/keisuke69/tune-up-aws-lambda">http://www.slideshare.net/keisuke69/tune-up-aws-lambda</a>
+{% oembed http://www.slideshare.net/keisuke69/tune-up-aws-lambda %}
 
 
 #### 3. サーバーレスAWS構成でセキュアなSPAを目指す - Cognito+API Gateway+Lambda+DynamoDB+KMS
 
-<a target="_blank" href="http://www.slideshare.net/masayuki-kato/serverless-awsspa">http://www.slideshare.net/masayuki-kato/serverless-awsspa</a>
+{% oembed http://www.slideshare.net/masayuki-kato/serverless-awsspa %}
 
 
 #### 4. Firebase+Railsのハイブリッドだからこそできた2ヶ月で2つのチャットアプリを開発した話
@@ -62,4 +62,4 @@ Vì tài liệu toàn bằng tiếng nhật nên mọi người thông cảm nh�
 
 #### 5. SEO対策したサイトをAPI Gateway+Lambdaで作ってみた話
 
-<a target="_blank" href="http://www.slideshare.net/ssuserb2e85a/seoapi-gatewaylambda">http://www.slideshare.net/ssuserb2e85a/seoapi-gatewaylambda</a>
+{% oembed http://www.slideshare.net/ssuserb2e85a/seoapi-gatewaylambda %}
