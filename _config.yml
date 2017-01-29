@@ -1,0 +1,40 @@
+# visit https://github.com/mojombo/jekyll/wiki/Configuration for more settings
+
+paginate: 10 # pagination based on number of posts
+paginate_path: "page:num"
+exclude: ["README.md"] # files to exclude
+highlighter: rogue
+markdown: kramdown
+disqus: disqus_iuJa449IW4
+google_analytics: Tech Blog
+title: Tech Blog
+
+defaults:
+  -
+    scope:
+      path: "" # empty string for all files
+    values:
+      title: Tech Blog
+
+description: Stylish Jekyll Theme
+author:
+  name: nooptr
+  # email: nooptr@gmail.com
+  github: nooptr
+  twitter: nooptr
+  # pinterest: nooptr
+  # linkedin: nooptr
+  bio: Blog chia sẻ những kiến thức về lập trình!
+  email_md5: 1dc005df10d27ebd46e4980cd9da0796
+
+rss_path: feed.xml
+categories_path: categories.html
+tags_path: tags.html
+
+# set it as url of an image
+# sidebar_background_image: https://www.dropbox.com/s/g9h23zrycedxtk5/sky.png?raw=1
+
+BASE_PATH:
+
+gems:
+  - jekyll-paginate
