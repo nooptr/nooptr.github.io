@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://nooptr.github.io/2017/01/20/10-web-technology.html</loc>
+<lastmod>2017-01-20T18:10:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://nooptr.github.io/2017/01/19/serverless-meetup-tokyo-2.html</loc>
+<lastmod>2017-01-19T22:10:00+09:00</lastmod>
+</url>
+<url>
+<loc>https://nooptr.github.io/404.html</loc>
+</url>
+<url>
+<loc>https://nooptr.github.io/about</loc>
+</url>
+<url>
+<loc>https://nooptr.github.io/archive</loc>
+</url>
+<url>
+<loc>https://nooptr.github.io/tag/hyde/</loc>
+</url>
+<url>
+<loc>https://nooptr.github.io/</loc>
+</url>
+<url>
+<loc>https://nooptr.github.io/tag/jekyll/</loc>
+</url>
+</urlset>
