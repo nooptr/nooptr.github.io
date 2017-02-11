@@ -6,6 +6,9 @@ gem "jekyll-paginate"
 gem 'github-pages'
 gem 'ruby-oembed'
 
+# jekyll-github-deploy
+gem 'jgd'
+
 group :jekyll_plugins do
   gem "jekyll-paginate"
   gem 'jekyll-compose'
