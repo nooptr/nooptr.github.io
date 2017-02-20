@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>NoSQL vs SQL</title>
+	<title>Inbound/Outbound data transfer</title>
 	
-	<meta name="description" content="Sự khác nhau của trường hợp sử dụng NoSQL với sử dụng SQL
+	<meta name="description" content="Inbound/Outbound data transfer là cái gì?
 ">
 	
 	<meta name="author" content="nooptr">
@@ -136,7 +136,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>NoSQL vs SQL </h1>
+  <h1>Inbound/Outbound data transfer </h1>
 </div>
 	
 <article>
@@ -145,64 +145,23 @@
 	 <span class="post-date">
 	   
 	   February 
-	   19th,
+	   20th,
 	   
 	   2017
 	 </span>
 	  <div class="article_body">
-	  <h2 id="nosql-vs-sql">NoSQL vs SQL</h2>
+	  <p>Mặc dù mình đã từng làm việc với AWS cũng được 1 thời gian nhưng mà còn lơ mơ về vấn đề <code>Inbound</code> vs <code>Outbound</code>. Không biết <code>Inbound</code> là vào hay là ra AWS nữa?? Hoang mang vãi.
+Hôm nay quyết định tìm hiểu kĩ càng xem nó là cái gì.</p>
 
-<p>Hầu hết tất cả chúng ta cũng đã từng nghe qua về RDBMS - Relational Database Management System (Hệ thống quản lý cơ sở dữ liệu quan hệ).
-Tuy nhiên, với sự tăng trưởng nhanh chóng về dữ liệu thì việc xử lí tốc độ nhanh là điều cực kì quan trọng.
-RDBMS mặc dù được nhiều developer ưa chuộng thế nhưng với 1 số bài toán khác có thể hiệu năng của nó không cao và nhiều khi còn khá là chậm, vì chúng ta sẽ phải join nhiều bảng hơn mới có thể lấy được dữ liệu mong muốn.
-Để giải quyết 1 số vấn đề đó thì NoSQL đã ra đời.</p>
+<p>Sau 1 hồi tìm hiểu các kiểu con đà điểu cuối cùng cũng đã hiểu nó là cái gì.</p>
 
-<p>NoSQL được sử dụng vì múc đích đưa ra hướng quản lí dữ liệu “Not only SQL”, hoặc là hệ thống quản lí dữ liệu tương ứng với “Not SQL”.
-Có rất nhiều kĩ thuật trong NoSQL như Document database, key-value … và những cái này thường hay được dùng trong ứng dụng game app, social app, IoT app.</p>
-
-<p><img src="https://docs.microsoft.com/ja-jp/azure/documentdb/media/documentdb-nosql-vs-sql/nosql-vs-sql-overview.png" alt="80x50" /></p>
-
-<h2 id="trng-hp-s-dng-nosql">Trường hợp sử dụng NoSQL</h2>
-
-<p>Bây giờ mình sẽ lấy 1 ví dụ về chức năng comment và post bài trong trang blog để mọi người dễ hiểu nhé. Cụ thể như sau:</p>
+<p>Inbound thì sẽ là cái hướng về phía AWS. còn Outbound sẽ là từ phía AWS hướng ra phía ngoài.
+Cụ thể như sau:</p>
 
 <ul>
-  <li>Người dùng có thể tạo bài viết. Hơn nữa có thể thêm ảnh, thêm video.</li>
-  <li>Người dùng khác có thể comment bài viết, cho điểm đánh giá bài viết.</li>
+  <li><code>Inbound</code>: khi upload đến server hoặc là khi client gửi request lên server.</li>
+  <li><code>Outbound</code>: Khi download 1 file từ server hoặc khi nhận response từ phía server trả về phía client.</li>
 </ul>
-
-<p>Vậy dữ liệu của chúng ta sẽ được lưu như thế nào? Với những thanh niên nào đã ưa chuộng MySQL chắc hẳn sẽ đưa ra 1 cấu trúc schema như ở bên dưới.</p>
-
-<p><img src="https://docs.microsoft.com/ja-jp/azure/documentdb/media/documentdb-nosql-vs-sql/nosql-vs-sql-social.png" alt="80x50" /></p>
-
-<p>OK, bây giờ đã có database rồi. Nhìn có vẻ ngon =)) Bây giờ hãy thử suy nghĩ khi hiển thị dữ liệu về bài viết, cả comment, video, ảnh trên web sẽ như thế nào nhé.
-Để lấy được hết dữ liệu cần thiết chúng ta phải join đến 8 bảng. ôi fukkk :’(
-Với dữ liệu lớn có khi sẽ mất đến mấy chục đến hàng trăm câu query cũng nên.</p>
-
-<p>Với vấn đề này thì có lẽ NoSQL là 1 giải pháp tốt hơn. Với NoSQL chúng ta có thể lưu toàn bộ thông tin vào trong 1 đối tượng được gọi là DocumentDB, do đó mà có thể cải thiện được hiệu năng, 
-chỉ cần 1 câu query không cần join có thể lấy được dữ liệu mong muốn.</p>
-
-<pre><code>{
-    "id":"ew12-res2-234e-544f",
-    "title":"post title",
-    "date":"2016-01-01",
-    "body":"this is an awesome post stored on NoSQL",
-    "createdBy":User,
-    "images":["http://myfirstimage.png","http://mysecondimage.png"],
-    "videos":[
-        {"url":"http://myfirstvideo.mp4", "title":"The first video"},
-        {"url":"http://mysecondvideo.mp4", "title":"The second video"}
-    ],
-    "audios":[
-        {"url":"http://myfirstaudio.mp3", "title":"The first audio"},
-        {"url":"http://mysecondaudio.mp3", "title":"The second audio"}
-    ]
-}
-</code></pre>
-
-<h2 id="s-khc-nhau-gia-nosql-vs-sql">Sự khác nhau giữa NoSQL vs SQL</h2>
-
-<p><img src="https://docs.microsoft.com/ja-jp/azure/documentdb/media/documentdb-nosql-vs-sql/nosql-vs-sql-comparison.png" alt="80x50" /></p>
 
 
 	  </div>
@@ -213,8 +172,8 @@ chỉ cần 1 câu query không cần join có thể lấy được dữ liệu 
 		  
 		  
 			 
-				<li><a href="/categories.html#database-ref">
-					database <span>(1)</span>
+				<li><a href="/categories.html#aws-ref">
+					aws <span>(1)</span>
 					
 				</a></li>
 			
@@ -229,22 +188,22 @@ chỉ cần 1 câu query không cần join có thể lấy được dữ liệu 
 		  
 			 
 				<li>
-					<a href="/tags.html#sql-ref">
-					sql <span>(1)</span>
+					<a href="/tags.html#aws-ref">
+					aws <span>(1)</span>
 					,
 					</a>
 				</li>
 			 
 				<li>
-					<a href="/tags.html#nosql-ref">
-					nosql <span>(1)</span>
+					<a href="/tags.html#inbound-ref">
+					inbound <span>(1)</span>
 					,
 					</a>
 				</li>
 			 
 				<li>
-					<a href="/tags.html#database-ref">
-					database <span>(1)</span>
+					<a href="/tags.html#outbound-ref">
+					outbound <span>(1)</span>
 					
 					</a>
 				</li>
@@ -259,7 +218,7 @@ chỉ cần 1 câu query không cần join có thể lấy được dữ liệu 
 		<div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=NoSQL vs SQL&via=nooptr"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Inbound/Outbound data transfer&via=nooptr"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -287,10 +246,10 @@ chỉ cần 1 câu query không cần join có thể lấy được dữ liệu 
 
 		<ul class="pager">
 		  
-		  <li class="previous"><a href="/web/linux/2017/01/30/garbage-collector-trong-ruby.html" title="Garbage Collector trong Ruby">&larr; Previous</a></li>
+		  <li class="previous"><a href="/database/2017/02/19/nosql-vs-sql.html" title="NoSQL vs SQL">&larr; Previous</a></li>
 		  
 		  
-		  <li class="next"><a href="/aws/2017/02/20/inbound-and-outbound-data-transfer.html" title="Inbound/Outbound data transfer">Next &rarr;</a></li>
+			<li class="next disabled"><a>Next &rarr;</a>
 		  
 		</ul>
 
