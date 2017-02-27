@@ -10,6 +10,7 @@ gem 'ruby-oembed'
 gem 'jgd'
 
 group :jekyll_plugins do
+  gem "jekyll-admin"
   gem "jekyll-paginate"
   gem 'jekyll-compose'
   gem "pygments.rb"
