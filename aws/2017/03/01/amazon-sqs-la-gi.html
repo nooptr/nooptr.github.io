@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Inbound/Outbound data transfer</title>
+	<title>Amazon SQS là gì</title>
 	
-	<meta name="description" content="Inbound/Outbound data transfer là cái gì?
+	<meta name="description" content="Amazon SQS làm được gì và khi nào nên sử dụng nó?
 ">
 	
 	<meta name="author" content="nooptr">
@@ -136,7 +136,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>Inbound/Outbound data transfer </h1>
+  <h1>Amazon SQS là gì </h1>
 </div>
 	
 <article>
@@ -144,25 +144,131 @@
 	<div class="col-sm-10">
 	 <span class="post-date">
 	   
-	   February 
-	   20th,
-	   
+	   March 
+	   1st,
+	     
 	   2017
 	 </span>
 	  <div class="article_body">
-	  <p>Mặc dù mình đã từng làm việc với AWS cũng được 1 thời gian nhưng mà còn lơ mơ về vấn đề <code>Inbound</code> vs <code>Outbound</code>. Không biết <code>Inbound</code> là vào hay là ra AWS nữa?? Hoang mang vãi.
-Hôm nay quyết định tìm hiểu kĩ càng xem nó là cái gì.</p>
+	  <p>Mình cũng đã nghe qua khá nhiều về cái tên SQS (Simple Queue Service) nhưng mà chưa từng lần nào tìm hiểu hẳn hoi tử tế. Hôm nay quyét tâm dành thời gian ra tìm hiểu nó.
+Thực ra mình đang định thi chứng chỉ Amazon Web Service mà trong đó thấy nó nói nhiều về SQS quá nên không tìm hiểu sâu không được.
+Thôi không nói lan man nữa. Vào vấn đề chính thôi.</p>
 
-<p>Sau 1 hồi tìm hiểu các kiểu con đà điểu cuối cùng cũng đã hiểu nó là cái gì.</p>
-
-<p>Inbound thì sẽ là cái hướng về phía AWS. còn Outbound sẽ là từ phía AWS hướng ra phía ngoài.
-Cụ thể như sau:</p>
+<h3 id="sqs-l-g">1. SQS là gì?</h3>
 
 <ul>
-  <li><code>Inbound</code>: khi upload đến server hoặc là khi client gửi request lên server.</li>
-  <li><code>Outbound</code>: Khi download 1 file từ server hoặc khi nhận response từ phía server trả về phía client.</li>
+  <li><code>Amazon Simple Queue Service</code> là 1 dịch vụ về hàng đợi lưu trữ thông điệp (message) 1 cách nhanh chóng, đáng tin cậy và có khả năng mở rộng cao.</li>
+  <li>Và đặc biệt là nó khá rẻ ($0.4 với 1 triệu requests)</li>
 </ul>
 
+<h3 id="sqs-lm-c-g">2. SQS làm được gì?</h3>
+
+<ul>
+  <li>Với 1 queue, nó có thể gửi, nhận, xoá message.</li>
+  <li>Với 1 số tính năng mà không yêu cầu tính realtime thì ta có thể gửi message đến queue và xử lí sau đó thông qua batch.</li>
+</ul>
+
+<h3 id="c-th-sqs-c-s-dng-nh-th-no">3. Cụ thể SQS được sử dụng như thế nào?</h3>
+
+<p>Để dễ hiểu bây giờ mình sẽ lấy 1 ví dụ về logic nạp tiền trong game.  Khi đó với trường hợp không sử dụng SQS với trường hợp sử dụng SQS nó khác nhau thế nào?</p>
+
+<h4 id="a-khng-s-dng-sqs">a. Không sử dụng SQS</h4>
+
+<ul>
+  <li>Khi người dùng nạp tiền trong game, đa số chúng ta đều viết logic xử lí payment đồng thời với việc ghi log vào trong DB.</li>
+  <li>Giả sử như việc ghi log vào DB là 1 việc cần thiết. Vì 1 lí do nào đó mà logic nào đó mà việc ghi log vào trong DB bị lỗi dẫn đến toàn bộ xử lí bị stop lại và đồng thời thông báo tin nhắn ERROR đến người dùng.</li>
+</ul>
+
+<h4 id="b-s-dng-sqs">b. Sử dụng SQS</h4>
+<ul>
+  <li>Khi người dùng tiến hành nạp tiền thì sẽ gửi 1 message ghi log đến SQS và sẽ thực hiện việc xử lí ghi log này về sau thông qua batch.</li>
+  <li>Nhờ vào việc xử lí này mà thời gian xử lí toàn bộ logic của hệ thống cũng giảm xuống và nó cũng không gây ảnh hưởng gì đến logic xử lí payment coin.</li>
+  <li>Đối với message đang được lưu trên SQS thì sẽ được xử lí thông qua batch từ 1 server khác được chạy định kì.</li>
+</ul>
+
+<h3 id="p-dng-thc-t">4. Áp dụng thực tế</h3>
+
+<p>Sau đây mình xin viết 1 đoạn code demo về việc tương tác với SQS như sau:</p>
+
+<p>※ Mình sẽ không hướng dẫn các bạn cài đặt SQS trên AWS nhé. Các bạn có thể tham khảo về việc cài đặt ở link cuối bài.</p>
+
+<p><code>Make a SQS instance</code></p>
+
+<pre><code>function static get_sqs_client()
+{
+    $client = new SqsClient([
+      'version' =&gt; 'latest',
+      'region' =&gt; Region::TOKYO
+    ]);
+
+    return $client;
+}
+</code></pre>
+
+<p><code>Send message to SQS</code></p>
+
+<pre><code>public static function send_sqs_message($sqs_name, $data) {
+  // Get SQS instance
+  $client = self::get_sqs_client();
+
+  // Send message to SQS
+  $client-&gt;sendMessage(array(
+    'QueueUrl'    =&gt; "https://sqs.ap-northeast-1.amazonaws.com/[QUEUE_ID]/{$sqs_name}",
+    'MessageBody' =&gt; json_encode($data),
+  ));
+}
+</code></pre>
+
+<p><code>Receive message from SQS</code></p>
+
+<pre><code>public static function receive_sqs_message() {
+  // Get SQS instance
+  $client = self::get_sqs_client();
+
+  // Get Queue URL
+  $listqueues = $client-&gt;listQueues();
+  $queueUrls  = $listqueues['QueueUrls'];
+
+  // Get message from Queue
+  foreach ($queueUrls as $queueUrl) {
+    $result = $client-&gt;receiveMessage(array(
+      'QueueUrl' =&gt; $queueUrl,
+      'MaxNumberOfMessages' =&gt; 10,
+      'WaitTimeSeconds' =&gt; 20
+    ));
+
+    foreach ($result-&gt;getPath('Messages') as $messageBody) {
+      $data = json_decode($messageBody);
+
+      // array('user_id' =&gt; '1', 'purchase_date' =&gt; '20140501', 'price' =&gt; '9800');
+      $values = $data['values'];
+
+      // TODO Process log to DB
+      $target_table = $data['target_table'];
+      Model_Logs::insert_log($target_table, $values);
+
+      // Delete message from SQS
+      $ReceiptHandle = $messageBody['ReceiptHandle'];
+      $client-&gt;deleteMessage([
+        'QueueUrl' =&gt; $queueUrl,
+        'ReceiptHandle' =&gt; $ReceiptHandle
+      ]);
+    }
+  }
+}
+</code></pre>
+
+<p>Hi vọng bài viết của mình sẽ giúp ích cho các bạn khi tìm hiểu về SQS.</p>
+
+<h3 id="ngun-tham-kho">Nguồn tham khảo</h3>
+
+<p>AWS SDK for PHP:</p>
+
+<p><a target="_blank" href="http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html">http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html</a></p>
+
+<p>Guide SQS for AWS SDK PHP:</p>
+
+<p><a target="_blank" href="http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-sqs.html">http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-sqs.html</a></p>
 
 	  </div>
 
@@ -188,22 +294,8 @@ Cụ thể như sau:</p>
 		  
 			 
 				<li>
-					<a href="/tags.html#aws-ref">
-					aws <span>(1)</span>
-					,
-					</a>
-				</li>
-			 
-				<li>
-					<a href="/tags.html#inbound-ref">
-					inbound <span>(1)</span>
-					,
-					</a>
-				</li>
-			 
-				<li>
-					<a href="/tags.html#outbound-ref">
-					outbound <span>(1)</span>
+					<a href="/tags.html#sqs-ref">
+					sqs <span>(1)</span>
 					
 					</a>
 				</li>
@@ -218,7 +310,7 @@ Cụ thể như sau:</p>
 		<div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Inbound/Outbound data transfer&via=nooptr"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Amazon SQS là gì&via=nooptr"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -246,10 +338,10 @@ Cụ thể như sau:</p>
 
 		<ul class="pager">
 		  
-		  <li class="previous"><a href="/database/2017/02/19/nosql-vs-sql.html" title="NoSQL vs SQL">&larr; Previous</a></li>
+		  <li class="previous"><a href="/web/2017/02/27/xu-huong-thiet-ke-web-2017.html" title="Xu hướng thiết kế web 2017">&larr; Previous</a></li>
 		  
 		  
-		  <li class="next"><a href="/web/2017/02/27/xu-huong-thiet-ke-web-2017.html" title="Xu hướng thiết kế web 2017">Next &rarr;</a></li>
+			<li class="next disabled"><a>Next &rarr;</a>
 		  
 		</ul>
 

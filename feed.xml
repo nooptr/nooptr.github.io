@@ -7,6 +7,133 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Amazon SQS là gì</title>
+				<description>&lt;p&gt;Mình cũng đã nghe qua khá nhiều về cái tên SQS (Simple Queue Service) nhưng mà chưa từng lần nào tìm hiểu hẳn hoi tử tế. Hôm nay quyét tâm dành thời gian ra tìm hiểu nó.
+Thực ra mình đang định thi chứng chỉ Amazon Web Service mà trong đó thấy nó nói nhiều về SQS quá nên không tìm hiểu sâu không được.
+Thôi không nói lan man nữa. Vào vấn đề chính thôi.&lt;/p&gt;
+
+&lt;h3 id=&quot;sqs-l-g&quot;&gt;1. SQS là gì?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;Amazon Simple Queue Service&lt;/code&gt; là 1 dịch vụ về hàng đợi lưu trữ thông điệp (message) 1 cách nhanh chóng, đáng tin cậy và có khả năng mở rộng cao.&lt;/li&gt;
+  &lt;li&gt;Và đặc biệt là nó khá rẻ ($0.4 với 1 triệu requests)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;sqs-lm-c-g&quot;&gt;2. SQS làm được gì?&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Với 1 queue, nó có thể gửi, nhận, xoá message.&lt;/li&gt;
+  &lt;li&gt;Với 1 số tính năng mà không yêu cầu tính realtime thì ta có thể gửi message đến queue và xử lí sau đó thông qua batch.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;c-th-sqs-c-s-dng-nh-th-no&quot;&gt;3. Cụ thể SQS được sử dụng như thế nào?&lt;/h3&gt;
+
+&lt;p&gt;Để dễ hiểu bây giờ mình sẽ lấy 1 ví dụ về logic nạp tiền trong game.  Khi đó với trường hợp không sử dụng SQS với trường hợp sử dụng SQS nó khác nhau thế nào?&lt;/p&gt;
+
+&lt;h4 id=&quot;a-khng-s-dng-sqs&quot;&gt;a. Không sử dụng SQS&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Khi người dùng nạp tiền trong game, đa số chúng ta đều viết logic xử lí payment đồng thời với việc ghi log vào trong DB.&lt;/li&gt;
+  &lt;li&gt;Giả sử như việc ghi log vào DB là 1 việc cần thiết. Vì 1 lí do nào đó mà logic nào đó mà việc ghi log vào trong DB bị lỗi dẫn đến toàn bộ xử lí bị stop lại và đồng thời thông báo tin nhắn ERROR đến người dùng.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;b-s-dng-sqs&quot;&gt;b. Sử dụng SQS&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Khi người dùng tiến hành nạp tiền thì sẽ gửi 1 message ghi log đến SQS và sẽ thực hiện việc xử lí ghi log này về sau thông qua batch.&lt;/li&gt;
+  &lt;li&gt;Nhờ vào việc xử lí này mà thời gian xử lí toàn bộ logic của hệ thống cũng giảm xuống và nó cũng không gây ảnh hưởng gì đến logic xử lí payment coin.&lt;/li&gt;
+  &lt;li&gt;Đối với message đang được lưu trên SQS thì sẽ được xử lí thông qua batch từ 1 server khác được chạy định kì.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;p-dng-thc-t&quot;&gt;4. Áp dụng thực tế&lt;/h3&gt;
+
+&lt;p&gt;Sau đây mình xin viết 1 đoạn code demo về việc tương tác với SQS như sau:&lt;/p&gt;
+
+&lt;p&gt;※ Mình sẽ không hướng dẫn các bạn cài đặt SQS trên AWS nhé. Các bạn có thể tham khảo về việc cài đặt ở link cuối bài.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Make a SQS instance&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function static get_sqs_client()
+{
+    $client = new SqsClient([
+      'version' =&amp;gt; 'latest',
+      'region' =&amp;gt; Region::TOKYO
+    ]);
+
+    return $client;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Send message to SQS&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static function send_sqs_message($sqs_name, $data) {
+  // Get SQS instance
+  $client = self::get_sqs_client();
+
+  // Send message to SQS
+  $client-&amp;gt;sendMessage(array(
+    'QueueUrl'    =&amp;gt; &quot;https://sqs.ap-northeast-1.amazonaws.com/[QUEUE_ID]/{$sqs_name}&quot;,
+    'MessageBody' =&amp;gt; json_encode($data),
+  ));
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Receive message from SQS&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public static function receive_sqs_message() {
+  // Get SQS instance
+  $client = self::get_sqs_client();
+
+  // Get Queue URL
+  $listqueues = $client-&amp;gt;listQueues();
+  $queueUrls  = $listqueues['QueueUrls'];
+
+  // Get message from Queue
+  foreach ($queueUrls as $queueUrl) {
+    $result = $client-&amp;gt;receiveMessage(array(
+      'QueueUrl' =&amp;gt; $queueUrl,
+      'MaxNumberOfMessages' =&amp;gt; 10,
+      'WaitTimeSeconds' =&amp;gt; 20
+    ));
+
+    foreach ($result-&amp;gt;getPath('Messages') as $messageBody) {
+      $data = json_decode($messageBody);
+
+      // array('user_id' =&amp;gt; '1', 'purchase_date' =&amp;gt; '20140501', 'price' =&amp;gt; '9800');
+      $values = $data['values'];
+
+      // TODO Process log to DB
+      $target_table = $data['target_table'];
+      Model_Logs::insert_log($target_table, $values);
+
+      // Delete message from SQS
+      $ReceiptHandle = $messageBody['ReceiptHandle'];
+      $client-&amp;gt;deleteMessage([
+        'QueueUrl' =&amp;gt; $queueUrl,
+        'ReceiptHandle' =&amp;gt; $ReceiptHandle
+      ]);
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Hi vọng bài viết của mình sẽ giúp ích cho các bạn khi tìm hiểu về SQS.&lt;/p&gt;
+
+&lt;h3 id=&quot;ngun-tham-kho&quot;&gt;Nguồn tham khảo&lt;/h3&gt;
+
+&lt;p&gt;AWS SDK for PHP:&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html&quot;&gt;http://docs.aws.amazon.com/aws-sdk-php/v3/guide/getting-started/installation.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Guide SQS for AWS SDK PHP:&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-sqs.html&quot;&gt;http://docs.aws.amazon.com/aws-sdk-php/v2/guide/service-sqs.html&lt;/a&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 01 Mar 2017 21:40:00 +0900</pubDate>
+				<link>/aws/2017/03/01/amazon-sqs-la-gi.html</link>
+				<guid isPermaLink="true">/aws/2017/03/01/amazon-sqs-la-gi.html</guid>
+			</item>
+		
+			<item>
 				<title>Xu hướng thiết kế web 2017</title>
 				<description>&lt;p&gt;&lt;img src=&quot;https://cloud.githubusercontent.com/assets/5398914/23362744/96c70c20-fd3a-11e6-97f9-12f4eb6224fc.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
