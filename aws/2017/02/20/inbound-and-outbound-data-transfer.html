@@ -2,7 +2,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Tech Blog</title>
+	<title>Inbound/Outbound data transfer</title>
+	
+	<meta name="description" content="Inbound/Outbound data transfer là cái gì?
+">
 	
 	<meta name="author" content="nooptr">
 
@@ -133,213 +136,132 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>Tech Blog </h1>
+  <h1>Inbound/Outbound data transfer </h1>
 </div>
+	
+<article>
 
+	<div class="col-sm-10">
+	 <span class="post-date">
+	   
+	   February 
+	   20th,
+	   
+	   2017
+	 </span>
+	  <div class="article_body">
+	  <p>Mặc dù mình đã từng làm việc với AWS cũng được 1 thời gian nhưng mà còn lơ mơ về vấn đề <code>Inbound</code> vs <code>Outbound</code>. Không biết <code>Inbound</code> là vào hay là ra AWS nữa?? Hoang mang vãi.
+Hôm nay quyết định tìm hiểu kĩ càng xem nó là cái gì.</p>
 
+<p>Sau 1 hồi tìm hiểu các kiểu con đà điểu cuối cùng cũng đã hiểu nó là cái gì.</p>
 
-<article class="home">
+<p>Inbound thì sẽ là cái hướng về phía AWS. còn Outbound sẽ là từ phía AWS hướng ra phía ngoài.
+Cụ thể như sau:</p>
 
-  <span class="post-date">
-    
-    March
-    1st,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/aws/2017/03/01/amazon-sqs-la-gi.html">Amazon SQS là gì</a>
-  </h2>
-
-  <div>
-    
-    
-    Amazon SQS làm được gì và khi nào nên sử dụng nó?
-
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    February
-    27th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/web/2017/02/27/xu-huong-thiet-ke-web-2017.html">Xu hướng thiết kế web 2017</a>
-  </h2>
-
-  <div>
-    
-    
-    Web design trend
-
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    February
-    20th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/aws/2017/02/20/inbound-and-outbound-data-transfer.html">Inbound/Outbound data transfer</a>
-  </h2>
-
-  <div>
-    
-    
-    Inbound/Outbound data transfer là cái gì?
-
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    February
-    19th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/database/2017/02/19/nosql-vs-sql.html">NoSQL vs SQL</a>
-  </h2>
-
-  <div>
-    
-    
-    Sự khác nhau của trường hợp sử dụng NoSQL với sử dụng SQL
-
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    January
-    30th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/web/linux/2017/01/30/garbage-collector-trong-ruby.html">Garbage Collector trong Ruby</a>
-  </h2>
-
-  <div>
-    
-    
-    Tối ưu code ruby thông qua garbage collector, cách thức làm việc của garbage collector
-
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    January
-    20th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/web/design/2017/01/20/10-web-technology.html">10 kĩ thuật nên biết khi phát triển web</a>
-  </h2>
-
-  <div>
-    
-    
-    10 kĩ thuật cần thiết khi phát triển 1 ứng dụng web
-
-    
-    
-  </div>
-
-</article>
-
-
-<article class="home">
-
-  <span class="post-date">
-    
-    January
-    19th,
-    
-    2017
-  </span>
-
-  <h2>
-    <a href="/serverless/meetup/2017/01/19/serverless-meetup-tokyo-2.html">Serverless Meetup Tokyo #2</a>
-  </h2>
-
-  <div>
-    
-    
-    Serverless Meetup lần thứ 2 được tổ chức Tokyo Nhật Bản
-
-    
-    
-  </div>
-
-</article>
-
-<hr/>
-
-<ul class="pager"> 
-
-  
-  <li class="previous disabled">
-    <a>&larr; Newer</a>
-  </li>
-  
-  
-  <li>
-    <span class="page_number">Page: 1 of 1</span>
-  </li>
-
-  
-  <li class="next disabled">
-    <a>Older &rarr;</a>        
-  </li>
-  
-
+<ul>
+  <li><code>Inbound</code>: khi upload đến server hoặc là khi client gửi request lên server.</li>
+  <li><code>Outbound</code>: Khi download 1 file từ server hoặc khi nhận response từ phía server trả về phía client.</li>
 </ul>
+
+
+	  </div>
+
+		
+		<ul class="tag_box list-unstyled list-inline">
+		  <li><i class="fa fa-folder-open"></i></li>
+		  
+		  
+			 
+				<li><a href="/categories.html#aws-ref">
+					aws <span>(2)</span>
+					
+				</a></li>
+			
+		  
+		</ul>
+		  
+
+		
+		<ul class="list-inline">
+		  <li><i class="fa fa-tags"></i></li>
+		  
+		  
+			 
+				<li>
+					<a href="/tags.html#aws-ref">
+					aws <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#inbound-ref">
+					inbound <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#outbound-ref">
+					outbound <span>(1)</span>
+					
+					</a>
+				</li>
+			
+		  
+		  
+		</ul>
+		  
+
+		<hr>
+
+		<div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Inbound/Outbound data transfer&via=nooptr"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+
+      <section class="col-sm-6 author">
+        <img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796" class="img-rounded author-image" />
+        <h4 class="section-title author-name">nooptr</h4>
+        <p class="author-bio">Blog chia sẻ những kiến thức về lập trình!</p>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+		<ul class="pager">
+		  
+		  <li class="previous"><a href="/database/2017/02/19/nosql-vs-sql.html" title="NoSQL vs SQL">&larr; Previous</a></li>
+		  
+		  
+		  <li class="next"><a href="/web/2017/02/27/xu-huong-thiet-ke-web-2017.html" title="Xu hướng thiết kế web 2017">Next &rarr;</a></li>
+		  
+		</ul>
+
+		<hr>
+	</div>
+	
+	<div class="col-sm-2 sidebar-2">
+	
+	</div>
+</article>
+<div class="clearfix"></div>
+
 
 
 

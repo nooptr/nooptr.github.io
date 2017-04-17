@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>10 kĩ thuật nên biết khi phát triển web</title>
+	
+	<meta name="description" content="10 kĩ thuật cần thiết khi phát triển 1 ứng dụng web
+">
+	
+	<meta name="author" content="nooptr">
+
+	<!-- Enable responsive viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Le styles -->
+	<link href="/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet">
+
+	<!-- Le fav and touch icons -->
+	<!-- Update these with your own images
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	-->
+
+	<link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+<body>
+	<nav class="navbar navbar-default visible-xs" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://github.com/nooptr">
+				<i class="fa fa-github"></i>
+			</a>
+			
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/nooptr">
+				<i class="fa fa-twitter"></i>
+			</a>
+			
+			
+			<a class="navbar-brand" href="/">
+				<img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796?s=35" class="img-circle" />
+				Tech Blog
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/categories.html">Categories</a></li>
+				<li><a href="/tags.html">Tags</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+
+	<!-- nav-menu-dropdown -->
+	<div class="btn-group hidden-xs" id="nav-menu">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<i class="fa fa-bars"></i>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+			<li><a href="/categories.html"><i class="fa fa-folder"></i>Categories</a></li>
+			<li><a href="/tags.html"><i class="fa fa-tags"></i>Tags</a></li>
+			<li class="divider"></li>
+			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
+		</ul>
+	</div>
+
+	<div class="col-sm-3 sidebar hidden-xs" style="">
+		<!-- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<a href="/">
+		<img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796?s=150" class="img-circle" />
+	</a>
+	<h3 class="title">
+        <a href="/">Tech Blog</a>
+    </h3>
+</header>
+
+
+<div id="bio" class="text-center">
+	Blog chia sẻ những kiến thức về lập trình!
+</div>
+
+
+<div id="contact-list" class="text-center">
+	<ul class="list-unstyled list-inline">
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://github.com/nooptr">
+				<i class="fa fa-github-alt fa-lg"></i>
+			</a>
+		</li>
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://twitter.com/nooptr">
+				<i class="fa fa-twitter fa-lg"></i>
+			</a>
+		</li>
+		
+		
+	</ul>
+	<ul id="contact-list-secondary" class="list-unstyled list-inline">
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="/feed.xml">
+				<i class="fa fa-rss fa-lg"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<!-- sidebar.html end -->
+
+	</div>
+
+	<div class="col-sm-9 col-sm-offset-3">
+		<div class="page-header">
+  <h1>10 kĩ thuật nên biết khi phát triển web </h1>
+</div>
+	
+<article>
+
+	<div class="col-sm-10">
+	 <span class="post-date">
+	   
+	   January 
+	   20th,
+	   
+	   2017
+	 </span>
+	  <div class="article_body">
+	  <p>Trong những năm gần đây thì nhiều kĩ thuật mới được ra đời, kéo theo việc xây dựng trang web cũng trở nên dễ dàng hơn.</p>
+
+<h2 id="web-components">1. Web Components</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/01-webcomponents-homepage.jpg" alt="800x400" class="lead" /></p>
+
+<p>Nếu chúng ta đã nghe khá nhiều qua cái tên Boostrap thì có lẽ cũng không lạ lẫm gì với cái tên Web Components nữa.
+Web Components là 1 cấu trúc mới được thiết kế theo chuẩn HTML5. Nếu sử dụng nó thì ta có thể tạo ra dropdown menu, slide ảnh … 1 cách dễ dàng.</p>
+
+<p>Ví dụ như chúng ta muốn tạo ra 1 cái menu dưới dạng dropbox. Thay vì cách truyền thống là sử dụng thẻ tag ul thì bây giờ chúng ta chỉ cần sử dụng thẻ tag
+là có thể tạo được ngay. Rất đơn giản phải không ak?</p>
+
+<p>Trang web: <a href="https://www.webcomponents.org/">https://www.webcomponents.org/</a></p>
+
+<h2 id="polymer">2. Polymer</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/02-polymer-project-homepage.jpg" alt="800x400" class="lead" /></p>
+
+<p>Nếu chúng ta dùng quen Web Components thì tiếp theo thư viện Polymer khá là cần thiết. Polymer thì sẽ giúp công việc develop trở nên đơn giản hơn.
+Polymer thường hay kết hợp với Web Components để phát triển trang web của bạn tốt hơn.</p>
+
+<p>Trang web: <a href="https://www.polymer-project.org/1.0/">https://www.polymer-project.org/1.0/</a></p>
+
+<p>DEMO: <a href="https://shop.polymer-project.org/">https://shop.polymer-project.org/</a></p>
+
+<h2 id="amp">3. AMP</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/03-washington-post-amp-pages.jpg" alt="800x400" class="lead" /></p>
+
+<p>AMP (Accelerated Mobile Pages) của Google đã thành công trong việc đơn giản hoá trang web nhằm cải thiện tốc độ hiển thị trên thiết bị điện thoại.
+Chỉ cần thêm 1 đoạn code rất ngắn là có thể làm được điều đó.</p>
+
+<p>Nếu chúng ta tối ưu trang web bằng AMP thì:</p>
+
+<ul>
+  <li>Tốc độ đọc trang web nhanh hơn.</li>
+  <li>Hình ảnh và video sẽ được load trước, do đó sẽ nâng cao được trải nghiệm người dùng trên thiết bị mobile.</li>
+</ul>
+
+<p>Vì hiện nay lượng người dùng duyệt trang web bằng điện thoại cũng khá là nhiều, nên việc lựa chọn AMP cho việc cải thiện trang web
+cũng là 1 sự lựa chọn không sai lầm.</p>
+
+<p>Trang web: <a href="https://www.ampproject.org/">https://www.ampproject.org/</a></p>
+
+<h2 id="gulp">4. Gulp</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/04-gulpjs-homepage.jpg" alt="800x400" class="lead" /></p>
+
+<p>Gulp là 1 tool để tự động hoá 1 số task được coi là tốn công tốn sức 1 cách tự động. 
+Ví dụ như tạo file CSS từ file Sass, tự động cập nhật trang web sau khi thay đổi code …</p>
+
+<p>Để hiểu rõ hơn về Gulp, bạn có thể tham khảo trang web: <a href="http://gulpjs.com/">http://gulpjs.com/</a></p>
+
+<h2 id="typescript">5. TypeScript</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/05-typescript-homepage.jpg" alt="800x400" class="lead" /></p>
+
+<p>Framework AngularJS là 1 trong những sản phẩm của Google về phát triển javascript phía Frontend. Gần đây Google đã đưa ngôn ngữ TypeScript vào như là ngôn ngữ script.
+Typescript sẽ giúp cho thời gian viết code giảm xuống, nâng cao hiệu suất làm việc.</p>
+
+<p>Vì Typescript là mở rộng của Javascript, nên những ai đã từng code Javascript thì việc tìm hiểu và học Typescript sẽ không tốn quá nhiều thời gian vì cách viết được coi là khá giống nhau.</p>
+
+<p>Trang web: <a href="https://www.typescriptlang.org/">https://www.typescriptlang.org/</a></p>
+
+<h2 id="threejs">6. Three.js</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/06-threejs-homepage.jpg" alt="800x400" class="lead" /></p>
+
+<p>Nếu ai có quan tâm đến 2D, 3D hoặc WebGL thì three.js là 1 sự lựa chọn hoàn hảo.</p>
+
+<p>Để biết rõ thêm chi tiết thì tham khảo trang web này: <a href="https://threejs.org/">https://threejs.org/</a></p>
+
+<h2 id="docker">7. Docker</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/07-docker-homepage.jpg" alt="800x400" class="lead" /></p>
+
+<p>Khi dev 1 dự án nào đó có lẽ việc xây dựng 1 môi trường phát triển có lẽ là 1 điều không thể thiếu được. Docker sẽ là 1 sự lựa chọn hoàn hảo.</p>
+
+<p>Chi tiết tham khảo. <a href="https://www.docker.com/">https://www.docker.com/</a></p>
+
+<h2 id="ionic-framework">8. Ionic Framework</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/08-ionic-framework-development.jpg" alt="800x400" class="lead" /></p>
+
+<p>Ionic Framework theo mình nghĩ nó là 1 framework mà không hướng đến phát triển web. Đối tượng của nó muốn hướng đến là những web engineer phát triển ứng dụng native bằng ngôn ngữ như javascript, CSS, HTML.</p>
+
+<p>Ionic là 1 framework free có thể sử dụng phát triển ứng dụng mobile như Android, iOS.</p>
+
+<p>Ionic Framework: <a href="http://ionicframework.com/">http://ionicframework.com/</a></p>
+
+<h2 id="zurbs-libraries">9. Zurb’s Libraries</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/09-zurb-foundation-motion-ui.jpg" alt="800x400" class="lead" /></p>
+
+<p>Phiên bản mới nhất của Foundation chia thành 2 loại:</p>
+
+<ul>
+  <li>Foundation for Emails đã có 1 số template trong phát triển Html Mail hoặc là tính năng tự động hoá.</li>
+  <li>Foundation for Sites dùng cho Web.</li>
+</ul>
+
+<p>Motion UI của Zurb là thư viện dùng cho việc tạo animation trên web.</p>
+
+<p>Foundation for Emails: <a href="http://foundation.zurb.com/emails.html">http://foundation.zurb.com/emails.html</a>
+Motion UI: <a href="http://zurb.com/playground/motion-ui">http://zurb.com/playground/motion-ui</a></p>
+
+<h2 id="google-web-starter-kit">10. Google Web Starter Kit</h2>
+
+<p><img src="https://static.techacademy.jp/magazine/wp-content/uploads/2017/01/10-google-web-starter-kit.jpg" alt="800x400" class="lead" /></p>
+
+<p>Google Web Starter Kit có những đặc điểm sau:</p>
+
+<ul>
+  <li>Code lint (chương trình check bug của source code)</li>
+  <li>Tính năng reload trình duyệt, HTTP server, CSS module, website có tính responsive</li>
+</ul>
+
+<p>Google Web Starter Kit:  <a href="https://developers.google.com/web/tools/starter-kit/">https://developers.google.com/web/tools/starter-kit/</a></p>
+
+
+	  </div>
+
+		
+		<ul class="tag_box list-unstyled list-inline">
+		  <li><i class="fa fa-folder-open"></i></li>
+		  
+		  
+			 
+				<li><a href="/categories.html#web-ref">
+					web <span>(3)</span>
+					,
+				</a></li>
+			 
+				<li><a href="/categories.html#design-ref">
+					design <span>(1)</span>
+					
+				</a></li>
+			
+		  
+		</ul>
+		  
+
+		
+		<ul class="list-inline">
+		  <li><i class="fa fa-tags"></i></li>
+		  
+		  
+			 
+				<li>
+					<a href="/tags.html#web-ref">
+					web <span>(3)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#design-ref">
+					design <span>(1)</span>
+					
+					</a>
+				</li>
+			
+		  
+		  
+		</ul>
+		  
+
+		<hr>
+
+		<div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=10 kĩ thuật nên biết khi phát triển web&via=nooptr"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+
+      <section class="col-sm-6 author">
+        <img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796" class="img-rounded author-image" />
+        <h4 class="section-title author-name">nooptr</h4>
+        <p class="author-bio">Blog chia sẻ những kiến thức về lập trình!</p>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+		<ul class="pager">
+		  
+		  <li class="previous"><a href="/serverless/meetup/2017/01/19/serverless-meetup-tokyo-2.html" title="Serverless Meetup Tokyo #2">&larr; Previous</a></li>
+		  
+		  
+		  <li class="next"><a href="/web/linux/2017/01/30/garbage-collector-trong-ruby.html" title="Garbage Collector trong Ruby">Next &rarr;</a></li>
+		  
+		</ul>
+
+		<hr>
+	</div>
+	
+	<div class="col-sm-2 sidebar-2">
+	
+	</div>
+</article>
+<div class="clearfix"></div>
+
+
+
+
+
+		<footer>
+			<hr/>
+			<p>
+				&copy; 2017 nooptr with <a href="">Tech Blog</a>
+			</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="/assets/resources/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/app.js"></script>
+</body>
+</html>
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91740366-1', 'auto');
+  ga('send', 'pageview');
+</script>
+

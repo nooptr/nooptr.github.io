@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>NoSQL vs SQL</title>
+	
+	<meta name="description" content="Sự khác nhau của trường hợp sử dụng NoSQL với sử dụng SQL
+">
+	
+	<meta name="author" content="nooptr">
+
+	<!-- Enable responsive viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Le styles -->
+	<link href="/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/assets/resources/syntax/syntax.css" rel="stylesheet">
+	<link href="/assets/css/style.css" rel="stylesheet">
+
+	<!-- Le fav and touch icons -->
+	<!-- Update these with your own images
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	-->
+
+	<link rel="alternate" type="application/rss+xml" title="" href="/feed.xml">
+</head>
+
+<body>
+	<nav class="navbar navbar-default visible-xs" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://github.com/nooptr">
+				<i class="fa fa-github"></i>
+			</a>
+			
+			
+			<a type="button" class="navbar-toggle nav-link" href="http://twitter.com/nooptr">
+				<i class="fa fa-twitter"></i>
+			</a>
+			
+			
+			<a class="navbar-brand" href="/">
+				<img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796?s=35" class="img-circle" />
+				Tech Blog
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="/">Home</a></li>
+				<li><a href="/categories.html">Categories</a></li>
+				<li><a href="/tags.html">Tags</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+
+	<!-- nav-menu-dropdown -->
+	<div class="btn-group hidden-xs" id="nav-menu">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<i class="fa fa-bars"></i>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+			<li><a href="/categories.html"><i class="fa fa-folder"></i>Categories</a></li>
+			<li><a href="/tags.html"><i class="fa fa-tags"></i>Tags</a></li>
+			<li class="divider"></li>
+			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
+		</ul>
+	</div>
+
+	<div class="col-sm-3 sidebar hidden-xs" style="">
+		<!-- sidebar.html -->
+<header class="sidebar-header" role="banner">
+	<a href="/">
+		<img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796?s=150" class="img-circle" />
+	</a>
+	<h3 class="title">
+        <a href="/">Tech Blog</a>
+    </h3>
+</header>
+
+
+<div id="bio" class="text-center">
+	Blog chia sẻ những kiến thức về lập trình!
+</div>
+
+
+<div id="contact-list" class="text-center">
+	<ul class="list-unstyled list-inline">
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://github.com/nooptr">
+				<i class="fa fa-github-alt fa-lg"></i>
+			</a>
+		</li>
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="https://twitter.com/nooptr">
+				<i class="fa fa-twitter fa-lg"></i>
+			</a>
+		</li>
+		
+		
+	</ul>
+	<ul id="contact-list-secondary" class="list-unstyled list-inline">
+		
+		
+		<li>
+			<a class="btn btn-default btn-sm" href="/feed.xml">
+				<i class="fa fa-rss fa-lg"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+<!-- sidebar.html end -->
+
+	</div>
+
+	<div class="col-sm-9 col-sm-offset-3">
+		<div class="page-header">
+  <h1>NoSQL vs SQL </h1>
+</div>
+	
+<article>
+
+	<div class="col-sm-10">
+	 <span class="post-date">
+	   
+	   February 
+	   19th,
+	   
+	   2017
+	 </span>
+	  <div class="article_body">
+	  <h2 id="nosql-vs-sql">NoSQL vs SQL</h2>
+
+<p>Hầu hết tất cả chúng ta cũng đã từng nghe qua về RDBMS - Relational Database Management System (Hệ thống quản lý cơ sở dữ liệu quan hệ).
+Tuy nhiên, với sự tăng trưởng nhanh chóng về dữ liệu thì việc xử lí tốc độ nhanh là điều cực kì quan trọng.
+RDBMS mặc dù được nhiều developer ưa chuộng thế nhưng với 1 số bài toán khác có thể hiệu năng của nó không cao và nhiều khi còn khá là chậm, vì chúng ta sẽ phải join nhiều bảng hơn mới có thể lấy được dữ liệu mong muốn.
+Để giải quyết 1 số vấn đề đó thì NoSQL đã ra đời.</p>
+
+<p>NoSQL được sử dụng vì múc đích đưa ra hướng quản lí dữ liệu “Not only SQL”, hoặc là hệ thống quản lí dữ liệu tương ứng với “Not SQL”.
+Có rất nhiều kĩ thuật trong NoSQL như Document database, key-value … và những cái này thường hay được dùng trong ứng dụng game app, social app, IoT app.</p>
+
+<p><img src="https://docs.microsoft.com/ja-jp/azure/documentdb/media/documentdb-nosql-vs-sql/nosql-vs-sql-overview.png" alt="80x50" /></p>
+
+<h2 id="trng-hp-s-dng-nosql">Trường hợp sử dụng NoSQL</h2>
+
+<p>Bây giờ mình sẽ lấy 1 ví dụ về chức năng comment và post bài trong trang blog để mọi người dễ hiểu nhé. Cụ thể như sau:</p>
+
+<ul>
+  <li>Người dùng có thể tạo bài viết. Hơn nữa có thể thêm ảnh, thêm video.</li>
+  <li>Người dùng khác có thể comment bài viết, cho điểm đánh giá bài viết.</li>
+</ul>
+
+<p>Vậy dữ liệu của chúng ta sẽ được lưu như thế nào? Với những thanh niên nào đã ưa chuộng MySQL chắc hẳn sẽ đưa ra 1 cấu trúc schema như ở bên dưới.</p>
+
+<p><img src="https://docs.microsoft.com/ja-jp/azure/documentdb/media/documentdb-nosql-vs-sql/nosql-vs-sql-social.png" alt="80x50" /></p>
+
+<p>OK, bây giờ đã có database rồi. Nhìn có vẻ ngon =)) Bây giờ hãy thử suy nghĩ khi hiển thị dữ liệu về bài viết, cả comment, video, ảnh trên web sẽ như thế nào nhé.
+Để lấy được hết dữ liệu cần thiết chúng ta phải join đến 8 bảng. ôi fukkk :’(
+Với dữ liệu lớn có khi sẽ mất đến mấy chục đến hàng trăm câu query cũng nên.</p>
+
+<p>Với vấn đề này thì có lẽ NoSQL là 1 giải pháp tốt hơn. Với NoSQL chúng ta có thể lưu toàn bộ thông tin vào trong 1 đối tượng được gọi là DocumentDB, do đó mà có thể cải thiện được hiệu năng, 
+chỉ cần 1 câu query không cần join có thể lấy được dữ liệu mong muốn.</p>
+
+<pre><code>{
+    "id":"ew12-res2-234e-544f",
+    "title":"post title",
+    "date":"2016-01-01",
+    "body":"this is an awesome post stored on NoSQL",
+    "createdBy":User,
+    "images":["http://myfirstimage.png","http://mysecondimage.png"],
+    "videos":[
+        {"url":"http://myfirstvideo.mp4", "title":"The first video"},
+        {"url":"http://mysecondvideo.mp4", "title":"The second video"}
+    ],
+    "audios":[
+        {"url":"http://myfirstaudio.mp3", "title":"The first audio"},
+        {"url":"http://mysecondaudio.mp3", "title":"The second audio"}
+    ]
+}
+</code></pre>
+
+<h2 id="s-khc-nhau-gia-nosql-vs-sql">Sự khác nhau giữa NoSQL vs SQL</h2>
+
+<p><img src="https://docs.microsoft.com/ja-jp/azure/documentdb/media/documentdb-nosql-vs-sql/nosql-vs-sql-comparison.png" alt="80x50" /></p>
+
+
+	  </div>
+
+		
+		<ul class="tag_box list-unstyled list-inline">
+		  <li><i class="fa fa-folder-open"></i></li>
+		  
+		  
+			 
+				<li><a href="/categories.html#database-ref">
+					database <span>(1)</span>
+					
+				</a></li>
+			
+		  
+		</ul>
+		  
+
+		
+		<ul class="list-inline">
+		  <li><i class="fa fa-tags"></i></li>
+		  
+		  
+			 
+				<li>
+					<a href="/tags.html#sql-ref">
+					sql <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#nosql-ref">
+					nosql <span>(1)</span>
+					,
+					</a>
+				</li>
+			 
+				<li>
+					<a href="/tags.html#database-ref">
+					database <span>(1)</span>
+					
+					</a>
+				</li>
+			
+		  
+		  
+		</ul>
+		  
+
+		<hr>
+
+		<div>
+      <section class="share col-sm-6">
+        <h4 class="section-title">Share Post</h4>
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=NoSQL vs SQL&via=nooptr"
+           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <i class="fa fa-twitter fa-lg"></i>
+          Twitter
+        </a>
+        <a class="btn btn-default btn-sm facebook" href="https://www.facebook.com/sharer/sharer.php"
+           onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <i class="fa fa-facebook fa-lg"></i>
+          Facebook
+        </a>
+        <a class="btn btn-default btn-sm gplus"
+           onclick="window.open('https://plus.google.com/share?url='+window.location.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <i class="fa fa-google-plus fa-lg"></i>
+          Google+
+        </a>
+      </section>
+
+      <section class="col-sm-6 author">
+        <img src="//www.gravatar.com/avatar/1dc005df10d27ebd46e4980cd9da0796" class="img-rounded author-image" />
+        <h4 class="section-title author-name">nooptr</h4>
+        <p class="author-bio">Blog chia sẻ những kiến thức về lập trình!</p>
+      </section>
+    </div>
+
+    <div class="clearfix"></div>
+
+		<ul class="pager">
+		  
+		  <li class="previous"><a href="/web/linux/2017/01/30/garbage-collector-trong-ruby.html" title="Garbage Collector trong Ruby">&larr; Previous</a></li>
+		  
+		  
+		  <li class="next"><a href="/aws/2017/02/20/inbound-and-outbound-data-transfer.html" title="Inbound/Outbound data transfer">Next &rarr;</a></li>
+		  
+		</ul>
+
+		<hr>
+	</div>
+	
+	<div class="col-sm-2 sidebar-2">
+	
+	</div>
+</article>
+<div class="clearfix"></div>
+
+
+
+
+
+		<footer>
+			<hr/>
+			<p>
+				&copy; 2017 nooptr with <a href="">Tech Blog</a>
+			</p>
+		</footer>
+	</div>
+
+	<script type="text/javascript" src="/assets/resources/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/resources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/assets/js/app.js"></script>
+</body>
+</html>
+
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-91740366-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
