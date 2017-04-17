@@ -7,6 +7,164 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Hiệu quả của exponential backoff trong xử lí error retries</title>
+				<description>&lt;h2 id=&quot;li-m-u&quot;&gt;Lời mở đầu&lt;/h2&gt;
+&lt;p&gt;Khi làm việc với API chắc hẳn ai cũng không lạ lẫm gì với các vấn đề liên quan đến gửi nhận dữ liệu như: đang gửi thì server bị lỗi đến đến gửi thất bại, rồi thì rõ ràng khi thất bại mình đã retries lại mấy lần rồi mà sao vẫn bị lỗi …. vân vân và vân vân …&lt;/p&gt;
+
+&lt;p&gt;Một trong những kĩ thuật khá đơn giản để giải quyết vấn đề này là thực hiện 1 logic retries request đó.
+Logic retries mà đa số chúng ta viết thì đều như sau:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;retries = 0
+
+DO
+    wait 1 second
+
+    status = Get the result of response
+
+    IF status = SUCCESS
+        retry = false
+    ELSE
+        retry = true
+    END IF
+
+    retries = retries + 1
+
+WHILE (retry AND (retries &amp;lt; MAX_RETRIES))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nhìn thuật toán bên trên dường như &lt;code&gt;quá perfect???&lt;/code&gt; nhưng mà khi suy nghĩ kĩ hơn thì nó thật sự không hiểu quả trong 1 số trường hợp.
+Vậy chúng ta hãy cùng đi xem nó là gì nhé.&lt;/p&gt;
+
+&lt;p&gt;OK. Let’s Go.&lt;/p&gt;
+
+&lt;h2 id=&quot;exponential-backoff-l-g&quot;&gt;Exponential Backoff là gì?&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;Exponential Backoff&lt;/code&gt; là 1 thuật toán tính toán thời gian đợi giữa mỗi lần retries theo hàm luỹ kế để việc thực hiện gửi lại request được hiệu quả nhất.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ví dụ như lần retries thứ 1 sẽ đợi 1s, lần retries thứ 2 sẽ đợi 2s, lần thứ 3 sẽ đợi 4s …. Tức là chúng ta sẽ làm thời gian đợi sau mỗi lần retries kéo dài ra mà không fix cứng thời gian wait như trước nữa và theo thống kê thì làm như này sẽ rất hiệu quả.&lt;/p&gt;
+
+&lt;h2 id=&quot;vn--g-nu-khng-dng-exponential-backoff&quot;&gt;Vấn đề gì nếu không dùng Exponential Backoff?&lt;/h2&gt;
+
+&lt;p&gt;Vậy với thuật toán ở bên trên chúng ta thấy nó đang gặp vấn đề gì?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Giả sử như lần đầu tiên chúng ta có N client đồng thời gửi request. Cả N request này đều gửi thất bại và yêu cầu retries lại. 
+Như chúng ta thấy bên trên thì sau 1s cả N client này đều gửi lại request đó. Hãy tưởng tượng server lúc đó đang trong trạng thái quá tải. 
+Nếu N client lại gửi request đồng thời sau 1s thì chẳng phải điều này là rất tệ đúng không ak? Server không thể nào handle được tất cả các request đó được.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Nếu thời gian gửi lại của các client này mà khác nhau đi thì có lẽ hiệu quả sẽ cao hơn. 
+Chính vì lí do này mà &lt;code&gt;Exponential Backoff&lt;/code&gt; đã ra đời.&lt;/p&gt;
+
+&lt;h2 id=&quot;ci-t-thut-ton-exponential-backoff&quot;&gt;Cài đặt thuật toán Exponential Backoff&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;retries = 0
+
+DO
+    wait for random from 0 to (2^retries * 100) milliseconds
+
+    status = Get the result of response
+
+    IF status = SUCCESS
+        retry = false
+    ELSE
+        retry = true
+    END IF
+
+    retries = retries + 1
+
+WHILE (retry AND (retries &amp;lt; MAX_RETRIES))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Với cài đặt trên thì chúng ta có thể thấy. Nếu request của N client đều thất bại và yêu cầu retries thì lúc này sẽ retries như sau.
+Client 1 sẽ đợi 1 khoảng thời gian là 1 số random từ 0 ~ (2^retries * 100) ms
+Client 2 sẽ đợi 1 khoảng thời gian là 1 số random từ 0 ~ (2^retries * 100) ms
+…&lt;/p&gt;
+
+&lt;p&gt;Cứ như thế thì khoảng thời gian mà mỗi client này gửi request lại phía server sẽ khác nhau đi. Nhờ việc tránh gửi đồng thời này dẫn đến hiệu quả cao hơn.&lt;/p&gt;
+
+&lt;h2 id=&quot;v-d-thc-t&quot;&gt;Ví dụ thực tế&lt;/h2&gt;
+
+&lt;p&gt;Bây giờ hãy thử xem các ông trùm lớn như Google, Amazon … đã thực thi nó như thế nào nhé.&lt;/p&gt;
+
+&lt;h4 id=&quot;google-http-client&quot;&gt;1. Google HTTP client&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;retry_interval = retry_interval * multiplier ^ (N - 1)
+randomized_interval := retry_interval * (random value in range [1 - randomization_factor, 1 + randomization_factor])
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Nếu status code của response là 500 hoặc 503 thì sẽ tiến hành retries.&lt;/li&gt;
+  &lt;li&gt;Giá trị default của &lt;code&gt;retry_interval = 0.5s&lt;/code&gt;, &lt;code&gt;randomization_factor = 0.5&lt;/code&gt;, &lt;code&gt;multiplier = 1.5&lt;/code&gt;, &lt;code&gt;max_interval = 1 minute&lt;/code&gt;, &lt;code&gt;max_elapsed_time = 15s&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Nếu &lt;code&gt;retry_interval &amp;gt; max_elapsed_time (15s)&lt;/code&gt; thì stop retries (mặc định là 10 lần)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;request retry_interval randomized_interval
+01      00.50          [0.25, 0.75]
+02      00.75          [0.38, 1.12]
+03      01.12          [0.56, 1.69]
+04      01.69          [0.84, 2.53]
+05      02.53          [1.27, 3.80]
+06      03.80          [1.90, 5.70]
+07      05.70          [2.85, 8.54]
+08      08.54          [4.27, 12.81]
+09      12.81          [6.41, 19.22]
+10      19.22          STOP
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;aws-simpledb&quot;&gt;2. AWS SimpleDB&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;currentRetry = 0
+ DO
+   status = execute Amazon SimpleDB request
+   IF status = success OR status = client error (4xx)
+     set retry to false
+     process the response or client error as appropriate
+   ELSE
+     set retry to true
+     currentRetry = currentRetry + 1
+     wait for a random delay between 0 and (4^currentRetry * 100) milliseconds
+   END-IF
+ WHILE (retry = true AND currentRetry &amp;lt; MaxNumberOfRetries) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;Kết quả:
+
+request randomized_interval
+1       [0, 400)
+2       [0, 1600)
+3       [0, 6400)
+4       [0, 25600)
+5       [0, 102400)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;kt-lun&quot;&gt;Kết luận&lt;/h2&gt;
+
+&lt;p&gt;Qua bài giới thiệu của mình hẳn các bạn cũng có cái nhìn khác về thuật toán retries rồi đúng không ak?
+Vậy còn chần chừ gì nữa, hãy sửa lại thuật toán để trở thành những pro nào.&lt;/p&gt;
+
+&lt;h3 id=&quot;ngun-tham-kho&quot;&gt;Nguồn tham khảo&lt;/h3&gt;
+
+&lt;p&gt;Error Retries and Exponential Backoff in AWS:&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://docs.aws.amazon.com/general/latest/gr/api-retries.html&quot;&gt;https://docs.aws.amazon.com/general/latest/gr/api-retries.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Exponential Backoff And Jitter:&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://www.awsarchitectureblog.com/2015/03/backoff.html&quot;&gt;https://www.awsarchitectureblog.com/2015/03/backoff.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Building for Performance and Reliability with Amazon SimpleDB:&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://aws.amazon.com/articles/Amazon-SimpleDB/1394&quot;&gt;https://aws.amazon.com/articles/Amazon-SimpleDB/1394&lt;/a&gt;&lt;/p&gt;
+
+</description>
+				<pubDate>Mon, 17 Apr 2017 21:30:00 +0900</pubDate>
+				<link>/pattern/2017/04/17/hieu-qua-cua-exponential-backoff-trong-xu-li-error-retries.html</link>
+				<guid isPermaLink="true">/pattern/2017/04/17/hieu-qua-cua-exponential-backoff-trong-xu-li-error-retries.html</guid>
+			</item>
+		
+			<item>
 				<title>Amazon SQS là gì</title>
 				<description>&lt;p&gt;Mình cũng đã nghe qua khá nhiều về cái tên SQS (Simple Queue Service) nhưng mà chưa từng lần nào tìm hiểu hẳn hoi tử tế. Hôm nay quyét tâm dành thời gian ra tìm hiểu nó.
 Thực ra mình đang định thi chứng chỉ Amazon Web Service mà trong đó thấy nó nói nhiều về SQS quá nên không tìm hiểu sâu không được.
@@ -644,19 +802,19 @@ Bên nhật rất thường hay tổ chức những buổi Meetup kiểu như n�
 
 &lt;h4 id=&quot;opening-2017serverless&quot;&gt;1. Opening: 2017年Serverless化していく世界の概況&lt;/h4&gt;
 
-&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/cAUdomU5jrU1wE&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/YoshidaShingo/welcometoserverlessmeetuptokyo2&quot; title=&quot;Serverless Meetup Tokyo #2 オープニング&quot; target=&quot;_blank&quot;&gt;Serverless Meetup Tokyo #2 オープニング&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.slideshare.net/YoshidaShingo&quot;&gt;Shingo Yoshida&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/cAUdomU5jrU1wE&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/YoshidaShingo/welcometoserverlessmeetuptokyo2&quot; title=&quot;Serverless Meetup Tokyo #2 オープニング&quot; target=&quot;_blank&quot;&gt;Serverless Meetup Tokyo #2 オープニング&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://www.slideshare.net/YoshidaShingo&quot;&gt;Shingo Yoshida&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
 
 &lt;/div&gt;
 
 &lt;h4 id=&quot;tune-up-aws-lambda&quot;&gt;2. Tune Up AWS Lambda&lt;/h4&gt;
 
-&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/BYEXaD5TtCWVmt&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/keisuke69/tune-up-aws-lambda&quot; title=&quot;Tune Up AWS Lambda&quot; target=&quot;_blank&quot;&gt;Tune Up AWS Lambda&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.slideshare.net/keisuke69&quot;&gt;Keisuke Nishitani&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/BYEXaD5TtCWVmt&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/keisuke69/tune-up-aws-lambda&quot; title=&quot;Tune Up AWS Lambda&quot; target=&quot;_blank&quot;&gt;Tune Up AWS Lambda&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://www.slideshare.net/keisuke69&quot;&gt;Keisuke Nishitani&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
 
 &lt;/div&gt;
 
 &lt;h4 id=&quot;awsspa---cognitoapi-gatewaylambdadynamodbkms&quot;&gt;3. サーバーレスAWS構成でセキュアなSPAを目指す - Cognito+API Gateway+Lambda+DynamoDB+KMS&lt;/h4&gt;
 
-&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/EGcK7bEM80x35I&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/masayuki-kato/serverless-awsspa&quot; title=&quot;Serverless AWS構成でセキュアなSPAを目指す&quot; target=&quot;_blank&quot;&gt;Serverless AWS構成でセキュアなSPAを目指す&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.slideshare.net/masayuki-kato&quot;&gt;Masayuki Kato&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/EGcK7bEM80x35I&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/masayuki-kato/serverless-awsspa&quot; title=&quot;Serverless AWS構成でセキュアなSPAを目指す&quot; target=&quot;_blank&quot;&gt;Serverless AWS構成でセキュアなSPAを目指す&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://www.slideshare.net/masayuki-kato&quot;&gt;Masayuki Kato&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
 
 &lt;/div&gt;
 
@@ -666,7 +824,7 @@ Bên nhật rất thường hay tổ chức những buổi Meetup kiểu như n�
 
 &lt;h4 id=&quot;seoapi-gatewaylambda&quot;&gt;5. SEO対策したサイトをAPI Gateway+Lambdaで作ってみた話&lt;/h4&gt;
 
-&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/l8pUhx0Q3eE58o&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/ssuserb2e85a/seoapi-gatewaylambda&quot; title=&quot;SEO対策したサイトをAPI Gateway+Lambdaで作った話&quot; target=&quot;_blank&quot;&gt;SEO対策したサイトをAPI Gateway+Lambdaで作った話&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;http://www.slideshare.net/ssuserb2e85a&quot;&gt;Takahiro Hirata&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
+&lt;div class=&quot;embed rich SlideShare&quot;&gt;&lt;iframe src=&quot;https://www.slideshare.net/slideshow/embed_code/key/l8pUhx0Q3eE58o&quot; width=&quot;427&quot; height=&quot;356&quot; frameborder=&quot;0&quot; marginwidth=&quot;0&quot; marginheight=&quot;0&quot; scrolling=&quot;no&quot; style=&quot;border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;&quot; allowfullscreen=&quot;&quot;&gt; &lt;/iframe&gt; &lt;div style=&quot;margin-bottom:5px&quot;&gt; &lt;strong&gt; &lt;a href=&quot;https://www.slideshare.net/ssuserb2e85a/seoapi-gatewaylambda&quot; title=&quot;SEO対策したサイトをAPI Gateway+Lambdaで作った話&quot; target=&quot;_blank&quot;&gt;SEO対策したサイトをAPI Gateway+Lambdaで作った話&lt;/a&gt; &lt;/strong&gt; from &lt;strong&gt;&lt;a target=&quot;_blank&quot; href=&quot;https://www.slideshare.net/ssuserb2e85a&quot;&gt;Takahiro Hirata&lt;/a&gt;&lt;/strong&gt; &lt;/div&gt;
 
 &lt;/div&gt;
 </description>
