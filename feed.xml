@@ -7,6 +7,70 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>xip.io domain ma thuật</title>
+				<description>&lt;p&gt;Các bạn trong làng IT đã từng nghe thấy cái tên &lt;code&gt;xip.io&lt;/code&gt; bao giờ chưa ak? Thực chất nó cũng chỉ là 1 cái domain thôi cũng không có gì kinh khủng cả. 
+Nhưng mà bên trong nó lại có 1 ma lực khá kinh khủng đấy. Vậy cùng đi vào bên trong xem nó là cái gì nhé.&lt;/p&gt;
+
+&lt;h4 id=&quot;xipio-l-g&quot;&gt;1. Xip.io là gì?&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;xip.io&lt;/code&gt; là domain cung cấp cho ta 1 cái DNS cho bất kì 1 địa chỉ IP nào. Hình như có cái gì đó sai sai chỗ này???
+Bình thường khi cài đặt domain chúng ta thấy là 1 domain chỉ có thể trỏ đến 1 địa chỉ IP duy nhất thôi đúng ko ak?
+Vậy tại sao cái này nó lại trỏ đến được nhiều IP được nhỉ?&lt;/p&gt;
+
+&lt;h4 id=&quot;xipio--lm-vic-nh-th-no&quot;&gt;2. Xip.io đã làm việc như thế nào?&lt;/h4&gt;
+
+&lt;p&gt;Thực chất &lt;code&gt;xip.io&lt;/code&gt; đã chạy 1 cái &lt;a target=&quot;_blank&quot; href=&quot;https://github.com/basecamp/xip-pdns&quot;&gt;custom DNS server&lt;/a&gt; và có khả năng tách địa chỉ IP từ domain và forward request đến địa chỉ IP đó.&lt;/p&gt;
+
+&lt;h4 id=&quot;cch-dng-xipio&quot;&gt;3. Cách dùng xip.io&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;xip.io&lt;/code&gt; dùng khá đơn giản. chúng ta chỉ cần gắn địa chỉ ip vào trước xip.io là OK. Ví dụ:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    10.0.0.1.xip.io       resolves to   10.0.0.1
+www.10.0.0.1.xip.io       resolves to   10.0.0.1
+mysite.10.0.0.1.xip.io    resolves to   10.0.0.1
+foo.bar.10.0.0.1.xip.io   resolves to   10.0.0.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;ng-dng&quot;&gt;4. Ứng dụng&lt;/h4&gt;
+
+&lt;p&gt;&lt;code&gt;Bài toán&lt;/code&gt;: Mình có 1 con server có địa chỉ IP là &lt;code&gt;54.54.54.54&lt;/code&gt; và đang chạy apache.
+Bây giờ sếp yêu cầu muốn chạy ứng dụng demo trên đó và chạy cả phpmyadmin nữa nhưng mà sếp lại không cho tiền mua domain để dùng. Vậy chúng ta sẽ làm như nào ak?&lt;/p&gt;
+
+&lt;p&gt;Có 1 cách là với mỗi ứng dụng chúng ta sẽ cài đặt để nó chạy trên 1 cổng khác nhau. ứng dụng web chạy cổng 80, còn phpmyadmin chạy cổng 81.&lt;/p&gt;
+
+&lt;p&gt;Ví dụ &lt;code&gt;úng dụng web: http://54.54.54.54/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;phpmyadmin: http://54.54.54.54:81/&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok. cách này cũng được. Nhưng mình sẽ giới thiệu cho các bạn cách khác hay hơn sử dụng &lt;code&gt;xip.io&lt;/code&gt;
+Trong file virualhost sẽ cấu hình như sau:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;VirtualHost *:80&amp;gt;
+   ServerName app.54.54.54.54.xip.io
+   DocumentRoot &quot;/var/www/html/app&quot;
+&amp;lt;/VirtualHost&amp;gt;
+
+&amp;lt;VirtualHost *:80&amp;gt;
+   ServerName phpmyadmin.54.54.54.54.xip.io
+   DocumentRoot &quot;/var/www/html/phpmyadmin&quot;
+&amp;lt;/VirtualHost&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Như vậy ta sẽ được 2 domain thực hiện 2 chức năng khác nhau.&lt;/p&gt;
+
+&lt;p&gt;App: http://app.54.54.54.54.xip.io&lt;/p&gt;
+
+&lt;p&gt;Phpmyadmin: http://phpmyadmin.54.54.54.54.xip.io&lt;/p&gt;
+
+&lt;p&gt;Qủa thật là tuyệt phải không ak? Không cần mua domain mà cũng có domain dùng free như 1 nguòi thợ phải ko các bác.&lt;/p&gt;
+
+</description>
+				<pubDate>Wed, 19 Apr 2017 19:58:00 +0900</pubDate>
+				<link>/dns/2017/04/19/xip-io-domain-ma-thuat.html</link>
+				<guid isPermaLink="true">/dns/2017/04/19/xip-io-domain-ma-thuat.html</guid>
+			</item>
+		
+			<item>
 				<title>Hiệu quả của exponential backoff trong xử lí error retries</title>
 				<description>&lt;h2 id=&quot;li-m-u&quot;&gt;Lời mở đầu&lt;/h2&gt;
 &lt;p&gt;Khi làm việc với API chắc hẳn ai cũng không lạ lẫm gì với các vấn đề liên quan đến gửi nhận dữ liệu như: đang gửi thì server bị lỗi đến đến gửi thất bại, rồi thì rõ ràng khi thất bại mình đã retries lại mấy lần rồi mà sao vẫn bị lỗi …. vân vân và vân vân …&lt;/p&gt;
