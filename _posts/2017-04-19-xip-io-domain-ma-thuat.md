@@ -60,9 +60,9 @@ Trong file virualhost sẽ cấu hình như sau:
 
 Như vậy ta sẽ được 2 domain thực hiện 2 chức năng khác nhau.
 
-App: http://app.54.54.54.54.xip.io
+`App: http://app.54.54.54.54.xip.io`
 
-Phpmyadmin: http://phpmyadmin.54.54.54.54.xip.io
+`Phpmyadmin: http://phpmyadmin.54.54.54.54.xip.io`
 
 Qủa thật là tuyệt phải không ak? Không cần mua domain mà cũng có domain dùng free như 1 nguòi thợ phải ko các bác.
 
