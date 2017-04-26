@@ -2,9 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>xip.io domain ma thuật</title>
+	<title>Phân biệt restart vs graceful trong apache</title>
 	
-	<meta name="description" content="xip.io is a magic domain name that provides wildcard DNS for any IP address.
+	<meta name="description" content="Bạn có biết đến graceful trong apache?
 ">
 	
 	<meta name="author" content="nooptr">
@@ -136,7 +136,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3">
 		<div class="page-header">
-  <h1>xip.io domain ma thuật </h1>
+  <h1>Phân biệt restart vs graceful trong apache </h1>
 </div>
 	
 <article>
@@ -145,67 +145,32 @@
 	 <span class="post-date">
 	   
 	   April 
-	   19th,
+	   26th,
 	   
 	   2017
 	 </span>
 	  <div class="article_body">
-	  <p>Các bạn trong làng IT đã từng nghe thấy cái tên <code>xip.io</code> bao giờ chưa ak? Thực chất nó cũng chỉ là 1 cái domain thôi cũng không có gì kinh khủng cả. 
-Nhưng mà bên trong nó lại có 1 ma lực khá kinh khủng đấy. Vậy cùng đi vào bên trong xem nó là cái gì nhé.</p>
+	  <p>1 hôm thấy con web chạy chậm quá, sếp đến gần bảo ê thằng em khởi động lại cho anh con web cái. chạy ì ạch quá. 
+Nhớ dùng <code>httpd -k graceful</code> chứ đừng dùng <code>httpd -k restart</code> nhé. Quái lạ <code>graceful</code> là cái gì nhỉ? Lần đầu tiên nghe thấy nó. Mọi lần mình vẫn dùng <code>restart</code> khởi động lại apache có thấy sao đâu.</p>
 
-<h4 id="xipio-l-g">1. Xip.io là gì?</h4>
+<p>Sau 1 hồi tìm hiểu cụ thể xem nó là gì thì hôm nay mình xin tóm tắt ngắn gọn về sự khác nhau giữa <code>restart</code> và <code>graceful</code>.</p>
 
-<p><code>xip.io</code> là domain cung cấp cho ta 1 cái DNS cho bất kì 1 địa chỉ IP nào. Hình như có cái gì đó sai sai chỗ này???
-Bình thường khi cài đặt domain chúng ta thấy là 1 domain chỉ có thể trỏ đến 1 địa chỉ IP duy nhất thôi đúng ko ak?
-Vậy tại sao cái này nó lại trỏ đến được nhiều IP được nhỉ?</p>
+<h4 id="graceful">1. Graceful</h4>
 
-<h4 id="xipio--lm-vic-nh-th-no">2. Xip.io đã làm việc như thế nào?</h4>
+<ul>
+  <li>Chờ đến khi các child process xử lí xong request thì sẽ kill và tạo mới child process khác (Do đó mà PID của child process sẽ bị thay đổi)</li>
+  <li>Parent process sẽ không bị kill, do đó PID vẫn giữ nguyên.</li>
+  <li>Parent process chỉ load lại file cấu hình và mở lại file log.</li>
+  <li>Tuy nhiên, trong 1 số trường hợp mà thêm module hoặc thay đổi SSL mà graceful sẽ hoạt động không chính xác. Trong trường hợp đó thì nên dùng restart.</li>
+</ul>
 
-<p>Thực chất <code>xip.io</code> đã chạy 1 cái <a target="_blank" href="https://github.com/basecamp/xip-pdns">custom DNS server</a> và có khả năng tách địa chỉ IP từ domain và forward request đến địa chỉ IP đó.</p>
+<h4 id="restart">2. Restart</h4>
 
-<h4 id="cch-dng-xipio">3. Cách dùng xip.io</h4>
+<ul>
+  <li>Kill toàn bộ child process ngay lập tức. Sau đó sẽ kill tiếp parent process. (Trường hợp này thì PID của cả parent lẫn child đều bị thay đổi)</li>
+</ul>
 
-<p><code>xip.io</code> dùng khá đơn giản. chúng ta chỉ cần gắn địa chỉ ip vào trước xip.io là OK. Ví dụ:</p>
-
-<pre><code>    10.0.0.1.xip.io       resolves to   10.0.0.1
-www.10.0.0.1.xip.io       resolves to   10.0.0.1
-mysite.10.0.0.1.xip.io    resolves to   10.0.0.1
-foo.bar.10.0.0.1.xip.io   resolves to   10.0.0.1
-</code></pre>
-
-<h4 id="ng-dng">4. Ứng dụng</h4>
-
-<p><code>Bài toán</code>: Mình có 1 con server có địa chỉ IP là <code>54.54.54.54</code> và đang chạy apache.
-Bây giờ sếp yêu cầu muốn chạy ứng dụng demo trên đó và chạy cả phpmyadmin nữa nhưng mà sếp lại không cho tiền mua domain để dùng. Vậy chúng ta sẽ làm như nào ak?</p>
-
-<p>Có 1 cách là với mỗi ứng dụng chúng ta sẽ cài đặt để nó chạy trên 1 cổng khác nhau. ứng dụng web chạy cổng 80, còn phpmyadmin chạy cổng 81.</p>
-
-<p>Ví dụ <code>úng dụng web: http://54.54.54.54/</code></p>
-
-<p><code>phpmyadmin: http://54.54.54.54:81/</code></p>
-
-<p>Ok. cách này cũng được. Nhưng mình sẽ giới thiệu cho các bạn cách khác hay hơn sử dụng <code>xip.io</code>
-Trong file virualhost sẽ cấu hình như sau:</p>
-
-<pre><code>&lt;VirtualHost *:80&gt;
-   ServerName app.54.54.54.54.xip.io
-   DocumentRoot "/var/www/html/app"
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:80&gt;
-   ServerName phpmyadmin.54.54.54.54.xip.io
-   DocumentRoot "/var/www/html/phpmyadmin"
-&lt;/VirtualHost&gt;
-</code></pre>
-
-<p>Như vậy ta sẽ được 2 domain thực hiện 2 chức năng khác nhau.</p>
-
-<p><code>App: http://app.54.54.54.54.xip.io</code></p>
-
-<p><code>Phpmyadmin: http://phpmyadmin.54.54.54.54.xip.io</code></p>
-
-<p>Qủa thật là tuyệt phải không ak? Không cần mua domain mà cũng có domain dùng free như 1 nguòi thợ phải ko các bác.</p>
-
+<p>Ok vậy đến đây bạn đã hiểu cụ thể nó là gì rồi đúng không ak? Chúc các bạn vận dụng nó tốt trong công việc. =))</p>
 
 	  </div>
 
@@ -215,8 +180,8 @@ Trong file virualhost sẽ cấu hình như sau:</p>
 		  
 		  
 			 
-				<li><a href="/categories.html#dns-ref">
-					dns <span>(1)</span>
+				<li><a href="/categories.html#apache-ref">
+					apache <span>(1)</span>
 					
 				</a></li>
 			
@@ -231,15 +196,15 @@ Trong file virualhost sẽ cấu hình như sau:</p>
 		  
 			 
 				<li>
-					<a href="/tags.html#xip.io-ref">
-					xip.io <span>(1)</span>
+					<a href="/tags.html#graceful-ref">
+					graceful <span>(1)</span>
 					,
 					</a>
 				</li>
 			 
 				<li>
-					<a href="/tags.html#xip-ref">
-					xip <span>(1)</span>
+					<a href="/tags.html#apache-ref">
+					apache <span>(1)</span>
 					
 					</a>
 				</li>
@@ -254,7 +219,7 @@ Trong file virualhost sẽ cấu hình như sau:</p>
 		<div>
       <section class="share col-sm-6">
         <h4 class="section-title">Share Post</h4>
-        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=xip.io domain ma thuật&via=nooptr"
+        <a class="btn btn-default btn-sm twitter" href="http://twitter.com/share?text=Phân biệt restart vs graceful trong apache&via=nooptr"
            onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <i class="fa fa-twitter fa-lg"></i>
           Twitter
@@ -282,10 +247,10 @@ Trong file virualhost sẽ cấu hình như sau:</p>
 
 		<ul class="pager">
 		  
-		  <li class="previous"><a href="/pattern/2017/04/17/hieu-qua-cua-exponential-backoff-trong-xu-li-error-retries.html" title="Hiệu quả của exponential backoff trong xử lí error retries">&larr; Previous</a></li>
+		  <li class="previous"><a href="/dns/2017/04/19/xip-io-domain-ma-thuat.html" title="xip.io domain ma thuật">&larr; Previous</a></li>
 		  
 		  
-		  <li class="next"><a href="/apache/2017/04/26/phan-biet-restart-vs-graceful.html" title="Phân biệt restart vs graceful trong apache">Next &rarr;</a></li>
+			<li class="next disabled"><a>Next &rarr;</a>
 		  
 		</ul>
 
