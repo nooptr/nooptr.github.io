@@ -7,6 +7,35 @@
 		<atom:link href="/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Phân biệt restart vs graceful trong apache</title>
+				<description>&lt;p&gt;1 hôm thấy con web chạy chậm quá, sếp đến gần bảo ê thằng em khởi động lại cho anh con web cái. chạy ì ạch quá. 
+Nhớ dùng &lt;code&gt;httpd -k graceful&lt;/code&gt; chứ đừng dùng &lt;code&gt;httpd -k restart&lt;/code&gt; nhé. Quái lạ &lt;code&gt;graceful&lt;/code&gt; là cái gì nhỉ? Lần đầu tiên nghe thấy nó. Mọi lần mình vẫn dùng &lt;code&gt;restart&lt;/code&gt; khởi động lại apache có thấy sao đâu.&lt;/p&gt;
+
+&lt;p&gt;Sau 1 hồi tìm hiểu cụ thể xem nó là gì thì hôm nay mình xin tóm tắt ngắn gọn về sự khác nhau giữa &lt;code&gt;restart&lt;/code&gt; và &lt;code&gt;graceful&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;graceful&quot;&gt;1. Graceful&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Chờ đến khi các child process xử lí xong request thì sẽ kill và tạo mới child process khác (Do đó mà PID của child process sẽ bị thay đổi)&lt;/li&gt;
+  &lt;li&gt;Parent process sẽ không bị kill, do đó PID vẫn giữ nguyên.&lt;/li&gt;
+  &lt;li&gt;Parent process chỉ load lại file cấu hình và mở lại file log.&lt;/li&gt;
+  &lt;li&gt;Tuy nhiên, trong 1 số trường hợp mà thêm module hoặc thay đổi SSL mà graceful sẽ hoạt động không chính xác. Trong trường hợp đó thì nên dùng restart.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;restart&quot;&gt;2. Restart&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kill toàn bộ child process ngay lập tức. Sau đó sẽ kill tiếp parent process. (Trường hợp này thì PID của cả parent lẫn child đều bị thay đổi)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ok vậy đến đây bạn đã hiểu cụ thể nó là gì rồi đúng không ak? Chúc các bạn vận dụng nó tốt trong công việc. =))&lt;/p&gt;
+</description>
+				<pubDate>Wed, 26 Apr 2017 21:48:00 +0900</pubDate>
+				<link>/apache/2017/04/26/phan-biet-restart-vs-graceful.html</link>
+				<guid isPermaLink="true">/apache/2017/04/26/phan-biet-restart-vs-graceful.html</guid>
+			</item>
+		
+			<item>
 				<title>xip.io domain ma thuật</title>
 				<description>&lt;p&gt;Các bạn trong làng IT đã từng nghe thấy cái tên &lt;code&gt;xip.io&lt;/code&gt; bao giờ chưa ak? Thực chất nó cũng chỉ là 1 cái domain thôi cũng không có gì kinh khủng cả. 
 Nhưng mà bên trong nó lại có 1 ma lực khá kinh khủng đấy. Vậy cùng đi vào bên trong xem nó là cái gì nhé.&lt;/p&gt;
@@ -58,9 +87,9 @@ Trong file virualhost sẽ cấu hình như sau:&lt;/p&gt;
 
 &lt;p&gt;Như vậy ta sẽ được 2 domain thực hiện 2 chức năng khác nhau.&lt;/p&gt;
 
-&lt;p&gt;App: http://app.54.54.54.54.xip.io&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;App: http://app.54.54.54.54.xip.io&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Phpmyadmin: http://phpmyadmin.54.54.54.54.xip.io&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Phpmyadmin: http://phpmyadmin.54.54.54.54.xip.io&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Qủa thật là tuyệt phải không ak? Không cần mua domain mà cũng có domain dùng free như 1 nguòi thợ phải ko các bác.&lt;/p&gt;
 
