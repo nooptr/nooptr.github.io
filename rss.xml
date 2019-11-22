@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nghệ Thuật Coding]]></title><description><![CDATA[Chia sẻ những kinh nghiệm, kiến thức, các case study giúp mọi người có thể tạo ra những service chuyên nghiệp hơn]]></description><link>https://nghethuatcoding.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 22 Nov 2019 03:52:38 GMT</lastBuildDate><item><title><![CDATA[Ginco đã sử dụng và tối ưu Cloud Functions như thế nào]]></title><description><![CDATA[Hôm nay mình chia sẻ đến mọi người 1 case study khá hay mà Ginco đã thực hiện để quản lí giao dịch trong Blockchain bằng cách sử dụng hệ sinh thái Firebase.]]></description><link>https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</link><guid isPermaLink="false">https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</guid><pubDate>Sat, 03 Aug 2019 14:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Xin chào mọi người. Dạo này ăn hành nhiều quá thành ra không có thời gian viết bài.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nghệ Thuật Coding]]></title><description><![CDATA[Chia sẻ những kinh nghiệm, kiến thức, các case study giúp mọi người có thể tạo ra những service chuyên nghiệp hơn]]></description><link>https://nghethuatcoding.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 22 Nov 2019 03:59:27 GMT</lastBuildDate><item><title><![CDATA[Ginco đã sử dụng và tối ưu Cloud Functions như thế nào]]></title><description><![CDATA[Hôm nay mình chia sẻ đến mọi người 1 case study khá hay mà Ginco đã thực hiện để quản lí giao dịch trong Blockchain bằng cách sử dụng hệ sinh thái Firebase.]]></description><link>https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</link><guid isPermaLink="false">https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</guid><pubDate>Sat, 03 Aug 2019 14:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Xin chào mọi người. Dạo này ăn hành nhiều quá thành ra không có thời gian viết bài.&lt;/p&gt;
 &lt;p&gt;Hôm nay mình chia sẻ đến mọi người 1 case study khá hay mà &lt;a href=&quot;https://ginco.io/en/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Ginco&lt;/a&gt; đã thực hiện để quản lí giao dịch trong Blockchain bằng cách sử dụng hệ sinh thái Firebase.&lt;/p&gt;
 &lt;p&gt;Gần đây công ty mình cũng bắt đầu đưa Firebase vào hệ thống. Đúng quả thật dùng Firebase xong thấy yêu nó hẳn. Nó quả thực rất mạnh và cũng khá rẻ. Nên thời gian tới mình sẽ tập trung viết nhiều bài hơn nữa về Firebase để mọi người có cái nhìn tổng quan hơn về nó.&lt;/p&gt;
 &lt;p&gt;Bây giờ chúng ta cùng nhau tìm hiểu xem Ginco đã sử dụng Firebase để xử lí các bài toán liên quan đến giao dịch Blockchain như thế nào.&lt;/p&gt;
@@ -2492,7 +2492,7 @@ END;
     &gt;
       &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/ab0044a1067d95ecaf54e5c9bee3df12/ad34c/repository-vuejs.png&quot;
+    href=&quot;/static/28271fcef05d13b82a8e0fcb568c6353/ad34c/repository-vuejs.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -2503,22 +2503,22 @@ END;
   &gt;&lt;/span&gt;
   &lt;picture&gt;
         &lt;source
-          srcset=&quot;/static/ab0044a1067d95ecaf54e5c9bee3df12/01472/repository-vuejs.webp 240w,
-/static/ab0044a1067d95ecaf54e5c9bee3df12/222bd/repository-vuejs.webp 480w,
-/static/ab0044a1067d95ecaf54e5c9bee3df12/d3307/repository-vuejs.webp 710w&quot;
+          srcset=&quot;/static/28271fcef05d13b82a8e0fcb568c6353/01472/repository-vuejs.webp 240w,
+/static/28271fcef05d13b82a8e0fcb568c6353/222bd/repository-vuejs.webp 480w,
+/static/28271fcef05d13b82a8e0fcb568c6353/d3307/repository-vuejs.webp 710w&quot;
           sizes=&quot;(max-width: 710px) 100vw, 710px&quot;
           type=&quot;image/webp&quot;
         /&gt;
         &lt;source
-          srcset=&quot;/static/ab0044a1067d95ecaf54e5c9bee3df12/0783d/repository-vuejs.png 240w,
-/static/ab0044a1067d95ecaf54e5c9bee3df12/782f4/repository-vuejs.png 480w,
-/static/ab0044a1067d95ecaf54e5c9bee3df12/ad34c/repository-vuejs.png 710w&quot;
+          srcset=&quot;/static/28271fcef05d13b82a8e0fcb568c6353/0783d/repository-vuejs.png 240w,
+/static/28271fcef05d13b82a8e0fcb568c6353/782f4/repository-vuejs.png 480w,
+/static/28271fcef05d13b82a8e0fcb568c6353/ad34c/repository-vuejs.png 710w&quot;
           sizes=&quot;(max-width: 710px) 100vw, 710px&quot;
           type=&quot;image/png&quot;
         /&gt;
         &lt;img
           class=&quot;gatsby-resp-image-image&quot;
-          src=&quot;/static/ab0044a1067d95ecaf54e5c9bee3df12/ad34c/repository-vuejs.png&quot;
+          src=&quot;/static/28271fcef05d13b82a8e0fcb568c6353/ad34c/repository-vuejs.png&quot;
           alt=&quot;repository vuejs.png&quot;
           title=&quot;repository vuejs.png&quot;
           loading=&quot;lazy&quot;
@@ -2529,9 +2529,87 @@ END;
 &lt;p&gt;Tiếp theo chúng ta sẽ đi định nghĩa cho từng Entity của project.&lt;/p&gt;
 &lt;p&gt;Ví dụ như bạn có 1 blog. Khi đó chúng ta sẽ có 1 Entity là posts. Và bây giờ chúng ta sẽ đi định nghĩa tất cả các thao tác &lt;strong&gt;CRUD (Create Update Delete)&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Và khi đó &lt;strong&gt;postsRepository.js&lt;/strong&gt; sẽ trở thành như sau:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/media/postRepository-Vuejs-design-pattern-javascript.png&quot; alt=&quot;postRepository Vuejs design pattern javascript&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 759px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/58006ae6033a8b15c482d045da93d721/b5cf5/postRepository-Vuejs-design-pattern-javascript_1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 86.69301712779973%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAARCAYAAADdRIy+AAAACXBIWXMAAAsSAAALEgHS3X78AAACkElEQVQ4y5VU2XLbMBDTj7SNZIkSSfHSfVpJmvSh0///HXSXsT1OJplOH3a4lC0QWIBKalOiVgWCEmi8Rt87NK2B9wqmKqB1jqYp4byAcwKK9mWVoZKnTysxrkKwCrP3WJcev/+84jgWjAS8BY2ulZhnjWGQdJiErsU/AImhdvTHxiEEi3lq0AaDWp/QjxKhkShEhlyktKYR7FoM8BE8qW0Fr0qsdYWt1zicR2skFDEpihSi/JrNPdi1T9rO0lwEtM2JkcbZOXSOZrgt8POAMHUIy4B1G/Dz5YzjccG+jzRT9Sl4EkJNgAWkyqFNAaFS6jNoSavMIMRDrLz4gVP+Pa73VdBv9/KJoYkMa3vCtBd4WQx+zQ7Pr2TMeYFpHdzQYKTZ7ucJy9oT2w7nY4r7aW7fGXWRXMTSuoIWJyiKUGUUpKG9lbEsGefJdZbKkWraOu4tecDqboD8kMEqktlNOZatwLIoHHONfdJoe/sGSmngl2NuqRiED+ED3gH2g4+UGZRfGFVFpmg06xgNsSTXjj1C56LE8zFHmTyqx6c17hn4TrK5SD6hHXKaVwbfFuhMhlCn8FS9TdGEirL4gOz0LRohyodoEvdXY6IpfM0UXT1d5ySvxDkobIPD+rxh3MmEvcd2jHh6mik2R4zN8cj9HmPEbNko7llB0tEVY5cVAbrAblNkTB5viqFnkg7jWyLKFNWFBffXNT4nqTxHroTdkjInwAz9VOCYJI7V0nwGms+Abu5h+wBHNc1NZMOs5uUtRhz4YfQ3Y2Js2Ck2RmtyUFDAJTH2dBC5q6hq+gqx0/y/lkYUGo4M9fQu92zKDZAlX12KMuTl8tPQS5Z2VyzvasLH/uYyn8q5+uoD8D/FoH8BZP0EguvcB3gAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/58006ae6033a8b15c482d045da93d721/01472/postRepository-Vuejs-design-pattern-javascript_1.webp 240w,
+/static/58006ae6033a8b15c482d045da93d721/222bd/postRepository-Vuejs-design-pattern-javascript_1.webp 480w,
+/static/58006ae6033a8b15c482d045da93d721/42453/postRepository-Vuejs-design-pattern-javascript_1.webp 759w&quot;
+          sizes=&quot;(max-width: 759px) 100vw, 759px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/58006ae6033a8b15c482d045da93d721/0783d/postRepository-Vuejs-design-pattern-javascript_1.png 240w,
+/static/58006ae6033a8b15c482d045da93d721/782f4/postRepository-Vuejs-design-pattern-javascript_1.png 480w,
+/static/58006ae6033a8b15c482d045da93d721/b5cf5/postRepository-Vuejs-design-pattern-javascript_1.png 759w&quot;
+          sizes=&quot;(max-width: 759px) 100vw, 759px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/58006ae6033a8b15c482d045da93d721/b5cf5/postRepository-Vuejs-design-pattern-javascript_1.png&quot;
+          alt=&quot;postRepository Vuejs design pattern javascript&quot;
+          title=&quot;postRepository Vuejs design pattern javascript&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Tiếp theo chúng ta sẽ đi tạo &lt;strong&gt;Factory&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/media/design-pattern-repository-factory.png&quot; alt=&quot;design pattern repository factory&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 584px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/c91ff8ed7f82485b604e415bb80ae4d0/3064a/design-pattern-repository-factory.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 52.226027397260275%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsSAAALEgHS3X78AAABqElEQVQoz4VS7XLaMBD0m6T4Q7Is2fIHjjEGh6hOgIbJhKZTJu//INs7AZ3Cn/7YsU53t97bU5DpBIVVSLMIxkqUpYLJBXKCNgkMQeuYkCBJZ5AqhJAhEjGDSEPE/OWYICkOroSDUnhSGdoqh5tGbLcO+x8Tnt3Kx11dYNQ5SiMwDBpPY47JWUzfS6wGg3Ft0DQZAk0FtsxgichWhT+v1h0WfYPlco55a1EYibxIkZKaNI2QsWJzhskvE9BZZfFZIZPoxqJ3Iz6Obzj+PHicTkd8fX3ixa3xun1GTz/gJh7tCiHDm9gT1k2OqjHeu6YtoCjBHrIqzvFdWWlUtTmT/EOQqugGATdx4dwo1GkKKUg6ja6swWJRo6Yc1zTzwpOXFGtFNReCe+KAybipkRKu1ViuDIZNj5dNjd3hFYf3PX6fPvD5692DLXnbT9jtnF+mkLM7hXTpScn8zIawdUybjNBaeiJkB+d5QazOj09Ku75GR+qvft4Qdl2JRwJ7KWUEIc4exTK6mD5DFD/Qu/v2F3Hy4HEluxl5cgu4zSMFoX+09yb/D/cK/wBHEDQD/BY6NgAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/c91ff8ed7f82485b604e415bb80ae4d0/01472/design-pattern-repository-factory.webp 240w,
+/static/c91ff8ed7f82485b604e415bb80ae4d0/222bd/design-pattern-repository-factory.webp 480w,
+/static/c91ff8ed7f82485b604e415bb80ae4d0/d0231/design-pattern-repository-factory.webp 584w&quot;
+          sizes=&quot;(max-width: 584px) 100vw, 584px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/c91ff8ed7f82485b604e415bb80ae4d0/0783d/design-pattern-repository-factory.png 240w,
+/static/c91ff8ed7f82485b604e415bb80ae4d0/782f4/design-pattern-repository-factory.png 480w,
+/static/c91ff8ed7f82485b604e415bb80ae4d0/3064a/design-pattern-repository-factory.png 584w&quot;
+          sizes=&quot;(max-width: 584px) 100vw, 584px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/c91ff8ed7f82485b604e415bb80ae4d0/3064a/design-pattern-repository-factory.png&quot;
+          alt=&quot;design pattern repository factory&quot;
+          title=&quot;design pattern repository factory&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Nhìn vào trên ta thấy việc tạo Repository từ Factory trở nên thật &lt;strong&gt;simple&lt;/strong&gt; phải không?&lt;/p&gt;
 &lt;p&gt;Hơn nữa ở đây ta cũng dễ dàng tạo &lt;strong&gt;mock repository (phù hợp với từng môi trường ví dụ develop, staging, production)&lt;/strong&gt; hay thêm 1 vài logic vào trong hàm &lt;strong&gt;get&lt;/strong&gt; ở trên cũng đều được hết.&lt;/p&gt;
 &lt;p&gt;Còn đây là cách áp dụng vào trong component:&lt;span
