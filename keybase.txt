@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/thangnv
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://nghethuatcoding.com
+  * I am thangnv (https://keybase.io/thangnv) on keybase.
+  * I have a public key ASBNaxD5MW9_jkVOT9-TiPJ29QmNoTJPEgJ0r0tB-9e3ugo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01204d6b10f9316f7f8e454e4fdf9388f276f5098da1324f120274af4b41fbd7b7ba0a",
+      "host": "keybase.io",
+      "kid": "01204d6b10f9316f7f8e454e4fdf9388f276f5098da1324f120274af4b41fbd7b7ba0a",
+      "uid": "7c94aa63be6511a1ba591ade2fcb5419",
+      "username": "thangnv"
+    },
+    "merkle_root": {
+      "ctime": 1573949118,
+      "hash": "6bbafba54ec91509486af05b7b29d995e17c4f27a2373a3c6cc42c848ae9cc351ea30aaf607c9d265be9c67605fc238c84d1cf7a988cce08f9a6ddc59033fe14",
+      "hash_meta": "92a5ecf9128360b0921cb3f06a7e622fce3370bbf51d07d0d1f1d8fac699c9c1",
+      "seqno": 9880860
+    },
+    "service": {
+      "entropy": "Y6uTOWx61+LDSLdStf2DcPRc",
+      "hostname": "nghethuatcoding.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "4.4.0"
+  },
+  "ctime": 1573949140,
+  "expire_in": 504576000,
+  "prev": "6c476b709c9743f3bf91abd1bd71f23ccf69e9487528401b73075e5c798258e9",
+  "seqno": 20,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgTWsQ+TFvf45FTk/fk4jydvUJjaEyTxICdK9LQfvXt7oKp3BheWxvYWTESpcCFMQgbEdrcJyXQ/O/kavRvXHyPM9p6Uh1KEAbcwdeXHmCWOnEICfq4FJAIEAJ/JjDIc4Y4kW1SjTWEJltHKPpUo3KhX+zAgHCo3NpZ8RAVOwouHyg0C+FLLTYFmBfGqH8nZLzgHCI4apsPbXcIfvfjAXvjZ6mvTMHjF6QQCPdOxbf0U3wdqpcT5MjViGHDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIBVEq9MYnzMIpaSt/allwim59XYzeUyxKjHOOwvD2UC7o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/thangnv
+
+==================================================================
