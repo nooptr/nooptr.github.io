@@ -155,14 +155,6 @@
   Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
   Link: </commons-fa8cf6d42879d84f4046.js>; rel=preload; as=script
   Link: </component---src-templates-post-template-js-170042985fc317eb7bf0.js>; rel=preload; as=script
-/2019/05/16/call-api-trong-vuejs-theo-cach-thong-minh-nhat/
-  Link: </webpack-runtime-97292a8bc13656196dce.js>; rel=preload; as=script
-  Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
-  Link: </commons-fa8cf6d42879d84f4046.js>; rel=preload; as=script
-  Link: </app-b43aa91d7aaf581e9335.js>; rel=preload; as=script
-  Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
-  Link: </commons-fa8cf6d42879d84f4046.js>; rel=preload; as=script
-  Link: </component---src-templates-post-template-js-170042985fc317eb7bf0.js>; rel=preload; as=script
 /2019/05/13/thiet-ke-he-thong-url-shortening/
   Link: </webpack-runtime-97292a8bc13656196dce.js>; rel=preload; as=script
   Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
@@ -275,6 +267,14 @@
   Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
   Link: </commons-fa8cf6d42879d84f4046.js>; rel=preload; as=script
   Link: </component---src-templates-page-template-js-fe888cf97aae0e68f5a0.js>; rel=preload; as=script
+/2019/05/16/call-api-trong-vuejs-theo-cach-thong-minh-nhat/
+  Link: </webpack-runtime-97292a8bc13656196dce.js>; rel=preload; as=script
+  Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
+  Link: </commons-fa8cf6d42879d84f4046.js>; rel=preload; as=script
+  Link: </app-b43aa91d7aaf581e9335.js>; rel=preload; as=script
+  Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
+  Link: </commons-fa8cf6d42879d84f4046.js>; rel=preload; as=script
+  Link: </component---src-templates-post-template-js-170042985fc317eb7bf0.js>; rel=preload; as=script
 /tag/design
   Link: </webpack-runtime-97292a8bc13656196dce.js>; rel=preload; as=script
   Link: </styles-c54d467e3152b7dbde15.js>; rel=preload; as=script
