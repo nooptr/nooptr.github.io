@@ -1,4 +1,140 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nghệ Thuật Coding]]></title><description><![CDATA[Chia sẻ những kinh nghiệm, kiến thức, các case study giúp mọi người có thể tạo ra những service chuyên nghiệp hơn]]></description><link>https://nghethuatcoding.com</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 22 Nov 2019 03:59:27 GMT</lastBuildDate><item><title><![CDATA[Ginco đã sử dụng và tối ưu Cloud Functions như thế nào]]></title><description><![CDATA[Hôm nay mình chia sẻ đến mọi người 1 case study khá hay mà Ginco đã thực hiện để quản lí giao dịch trong Blockchain bằng cách sử dụng hệ sinh thái Firebase.]]></description><link>https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</link><guid isPermaLink="false">https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</guid><pubDate>Sat, 03 Aug 2019 14:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Xin chào mọi người. Dạo này ăn hành nhiều quá thành ra không có thời gian viết bài.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nghệ Thuật Coding]]></title><description><![CDATA[Chia sẻ những kinh nghiệm, kiến thức, các case study giúp mọi người có thể tạo ra những service chuyên nghiệp hơn]]></description><link>https://nghethuatcoding.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 03 May 2020 01:50:08 GMT</lastBuildDate><item><title><![CDATA[Đào sâu về MySQL]]></title><description><![CDATA[Hầu như ai cũng đã từng và đang dùng MySQL nhưng mà cũng có nhiều thứ mà ít ai biết về MySQL. Nên hôm nay mình sẽ đào sâu về nó để chỉ cho mọi người biết nhé ...]]></description><link>https://nghethuatcoding.com2020/05/02/dao-sau-ve-mysql</link><guid isPermaLink="false">https://nghethuatcoding.com2020/05/02/dao-sau-ve-mysql</guid><pubDate>Sat, 02 May 2020 23:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Hôm nay tình cờ đọc được 1 quyển sách về MySQL thấy khá hay nên muốn chia sẻ lại với mọi người những cái mình đã học được.&lt;/p&gt;
+&lt;p&gt;Về MySQL thì chắc ai cũng đã từng dùng hay đang dùng nó cho một số dự án từ vài người dùng đến hàng triệu người dùng. Từ các website về blog cho đến các trang thương mại điện tử, các server dành cho game…&lt;/p&gt;
+&lt;p&gt;Với hệ thống nhỏ nhỏ thì chắc chẳng cần quan tâm gì nhiều đến cách hoạt động của nó làm gì cho mệt. Nhưng mà khi hệ thống dã lớn lên, phải xử lí hàng nghìn, hàng triệu queries/s thì việc hiểu rõ được cơ chế hoạt động cũng nó là điều vô cùng quan trọng.&lt;/p&gt;
+&lt;p&gt;Việc master được tất tần tật về MySQL thì vô cùng khó, nhưng mà hiểu được cái gì đó sâu sâu 1 chút thì cũng giúp chúng ta hơn hẳn được nhiều người rồi.&lt;/p&gt;
+&lt;p&gt;Nên hôm nay mình sẽ giới thiệu đến mọi người 1 số vấn đề mà mọi người đang chưa hiểu hoặc hiểu nhầm về MySQL nhé.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Mục tiêu bài viết:&lt;/strong&gt;&lt;br&gt;
+・Hiểu được chức năng bên trong MySQL&lt;br&gt;
+・Biết cách thiết kế dữ liệu cho tối ưu nhất  &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Đối tượng hướng đến:&lt;/strong&gt;&lt;br&gt;
+・Người đã từng làm việc với MySQL&lt;br&gt;
+・Người muốn tối ưu hiệu năng MySQL  &lt;/p&gt;
+&lt;h2 id=&quot;1-đơn-vị-io&quot;&gt;&lt;a href=&quot;#1-%C4%91%C6%A1n-v%E1%BB%8B-io&quot; aria-label=&quot;1 đơn vị io permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;1. Đơn vị I/O&lt;/h2&gt;
+&lt;p&gt;Khi dùng MySQL thì đa số là thao tác trên các record(bản ghi) của MySQL. Nên đa số chúng ta đều nghĩ là dữ liệu được xử lí theo đơn vị record. Nhưng thực tế MySQL lại thao tác dữ liệu theo từng đơn vị page (trang) có kích thước được định nghĩa trước.&lt;/p&gt;
+&lt;p&gt;Để dễ hiểu thì chúng ta cùng xem ảnh bên dưới:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/5755d0f08e492040065f9f20dabfdf5a/2f950/20200502_mysql_page.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 50%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsSAAALEgHS3X78AAAB6UlEQVQoz22S22/SYBiH90d7qVnihYlXXpgZY1C2xTmJm0aHHHQHJ5siYxkI4QwRXSiHQQv0DO3j14bGRv2SJ83b3/c+fb+2a67r4i3XcXEWjs/SXvoENd4WQTgL516v7xCutaDQGzO0NyOspMwyPcVOKVgJGe1gROFJllIkhxYfYScVFiKzxT4zOfF7vN5gqLVgQm00QGtXUZoVqp8/0cqeMamXMH616Oe+MXl3in14ibR/TG37gJ+xD5gf8xjxr0LYXQmdP8LxrEdXLtCU8qQzrzjPvafdvaCtZWnOz2hJ4iGDU84Le8SPn3KS26XRO6FynaY/aa2OHBIqcwVJlhhOh/zod4lJR+zIR2zNE2waCV7aSfaXKaJSjI1alEh3h9dWkhfWW8pGzXc4YeHCNMG2vbsCh8qiw5XTpLhsU7SbbE3rPFA73OvkuHN1yO1KhvtKk3W5TmY+8B1L76M4K2FXNfgyNcmrNheCkgrlOVR0gQaP+wvujmC9PeXW9x4PG0NSisve2KU6s1YThoSXis6jgc7m2OTZjUnkxvDZuJZ9tscGz8c6u4pFdGJRnmnesbB1FVPXQr/NSmjoukDDFke3TENg+tSqVUrFop97tWkYPoaHqFVNQxfZP0Lv6oh39zfB+l8WEHb8BqON5hfQX4CfAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/5755d0f08e492040065f9f20dabfdf5a/01472/20200502_mysql_page.webp 240w,
+/static/5755d0f08e492040065f9f20dabfdf5a/222bd/20200502_mysql_page.webp 480w,
+/static/5755d0f08e492040065f9f20dabfdf5a/620b9/20200502_mysql_page.webp 960w,
+/static/5755d0f08e492040065f9f20dabfdf5a/28063/20200502_mysql_page.webp 1440w,
+/static/5755d0f08e492040065f9f20dabfdf5a/ded3f/20200502_mysql_page.webp 1600w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/5755d0f08e492040065f9f20dabfdf5a/0783d/20200502_mysql_page.png 240w,
+/static/5755d0f08e492040065f9f20dabfdf5a/782f4/20200502_mysql_page.png 480w,
+/static/5755d0f08e492040065f9f20dabfdf5a/f570d/20200502_mysql_page.png 960w,
+/static/5755d0f08e492040065f9f20dabfdf5a/8d0ff/20200502_mysql_page.png 1440w,
+/static/5755d0f08e492040065f9f20dabfdf5a/2f950/20200502_mysql_page.png 1600w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/5755d0f08e492040065f9f20dabfdf5a/f570d/20200502_mysql_page.png&quot;
+          alt=&quot;20200502 mysql page&quot;
+          title=&quot;20200502 mysql page&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Nhìn vào ảnh bên trên thì mình nghĩ mọi người có thể hiểu được. Thì đơn vị I/0 nhỏ nhất trong MySQL không phải là record mà là page nhé.&lt;/p&gt;
+&lt;p&gt;Với MySQL thì kích thước của page default là 16KB. (Ở đây mọi người nên chú ý 1 điểm là nếu muốn change size của page thì chúng ta phải xoá instance đi và tạo lại thì mới change được, còn chỉ start stop mysql thì không thể change được nhé)&lt;/p&gt;
+&lt;p&gt;Chính vì lí do đó mà thằng RDS của AWS không có option change được size của page.&lt;/p&gt;
+&lt;p&gt;Vậy đến đây đa số cũng biết được đơn vị cấu tạo nhỏ nhất của I/O trong MySQL là gì rồi đúng không ak? &lt;/p&gt;
+&lt;p&gt;Vậy biết được cái này để làm gì? Thì đi đến phần tiếp theo nhá.&lt;/p&gt;
+&lt;h2 id=&quot;2-ảnh-hưởng-to-lớn-của-auto_increment&quot;&gt;&lt;a href=&quot;#2-%E1%BA%A3nh-h%C6%B0%E1%BB%9Fng-to-l%E1%BB%9Bn-c%E1%BB%A7a-auto_increment&quot; aria-label=&quot;2 ảnh hưởng to lớn của auto_increment permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;2. Ảnh hưởng to lớn của AUTO_INCREMENT&lt;/h2&gt;
+&lt;p&gt;Việc setting primary key (khoá chính) với AUTO_INCREMENT thì chắc ai cũng biết rồi. Nhưng mà việc setting này có ảnh hưởng to lớn đến hiệu năng như thế nào thì chúng ta cùng đi xem 2 ví dụ dưới đây nhé.&lt;/p&gt;
+&lt;p&gt;Để dễ hiểu, mình sẽ lấy 1 ví dụ trong game nhé. Đó là muốn tạo ra 1 bảng lưu giữ thông tin nhân vật(character) của người dùng.&lt;/p&gt;
+&lt;p&gt;Ví dụ 1:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;CREATE TABLE user_characters &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  user_id INT NOT NULL DEFAULT &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;,
+  user_character_id INT NOT NULL DEFAULT &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;,
+  character_id INT NOT NULL DEFAULT &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;,
+  PRIMARY_KEY &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user_id, user_character_id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;,
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ví dụ 2:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;bash&quot;&gt;&lt;pre class=&quot;language-bash&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;CREATE TABLE user_characters &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;id&lt;/span&gt; INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  user_id INT NOT NULL DEFAULT &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;,
+  user_character_id INT NOT NULL DEFAULT &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;,
+  character_id INT NOT NULL DEFAULT &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;,
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Khi chúng ta muốn lấy thông tin nhân vật mà người dùng có ID =4 1234 đang giữ thì sẽ thực hiện câu SQL như sau:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;SELECT * FROM user_characters WHERE user_id = 41234&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Vậy hiệu năng khi thực hiện câu SQL này trên 2 ví dụ trên khác nhau thế nào?&lt;/p&gt;
+&lt;p&gt;Cụ thể như ảnh bên dưới:
+&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/f0e614dffb5dacb4954a7493fb7c7665/2f950/20200502_01_mysql_page_primary_key.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 68%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAOCAYAAAAvxDzwAAAACXBIWXMAAAsSAAALEgHS3X78AAACw0lEQVQ4y31TaVNaQRDkRydlGY9SEXjIJYKIPEAgIPFAuQRPjAJiQgA1XvmSRAIqICYV0SBXZ94K+MVkqrp6p3e337yaWVGr1YIQAjcaTYZ6vQFBvry8wv7+BySTn5BKpVGp3KPZbJ9rPp1tEnfuCyHqLCqVO8zO8HBapjGtVYLXaQhqWKd0cPBGmCe1TDNNqOE0G+G2mWmtQjIRZ/c7xl3Dh/s7BFzj8Ls0mOfFWLRIGS/b5AjN6SiXMCyYJUz3OpRwTw3gJLXzsuGfhwo2loxY90wh6FIh9G6cPqAk1mLLZ2bayqwGK24NAk4lO+dzyPHlaO8fhlRheF6H1Xk9lmak8Nrl8FglVMkYVhcMTFu2cQxLpAdcaizwwzjLRLuGgpeo1XauUoXRVReiYRc2vTwiPgurbDfkQGJjDu8DVmz7rYj4Saf9aNiJdfqjr+fpdlPaFeI/Ua1WUSgUCEXc3JRZXqvVCbU21/H4WGvnTxCViiWUCiUU6ZKA8s0toYzbchkX378hnUrR2HzE0eFhdzReCmGP/bJa2g8NNwiNbBBKSR+MWhl0CjFGel9DNtgHLSeBanQIZr0W+VweP7I5ZC+yKFwXGPK5S1Z5x1S0rR9GjOewZ5ETyxAzybA+KYae64dW0gvV0Cuohl9jQvoGBsUQlJSrR3pof4DlGnEPrnLZbmNEa2SyZVMhYlcRK7A5QyNhU2JtUU8dn0DIrabRUSM8p8WGx4DgrJLWwkgpGAdptH6Vr7uNEXnsHDx2GRZtNMgWGmSnAsG3CuxMjiJqkGKfVxDGEDNypEmRMMmZJnB8mkPcKMNd8erZMBMPI7P3hHRsBcfJCFK7foTsYwhaZfDRq/Dzo/CbRxGiV+M1jSBAL8ZHzPaJfxbzz4YvdazRaOD8cwKnBzGcZHYZTg+iOKdXcZzeYesT4rPDGMsf7n93m/IXXdakXFHdu/AAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/f0e614dffb5dacb4954a7493fb7c7665/01472/20200502_01_mysql_page_primary_key.webp 240w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/222bd/20200502_01_mysql_page_primary_key.webp 480w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/620b9/20200502_01_mysql_page_primary_key.webp 960w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/28063/20200502_01_mysql_page_primary_key.webp 1440w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/ded3f/20200502_01_mysql_page_primary_key.webp 1600w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/f0e614dffb5dacb4954a7493fb7c7665/0783d/20200502_01_mysql_page_primary_key.png 240w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/782f4/20200502_01_mysql_page_primary_key.png 480w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/f570d/20200502_01_mysql_page_primary_key.png 960w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/8d0ff/20200502_01_mysql_page_primary_key.png 1440w,
+/static/f0e614dffb5dacb4954a7493fb7c7665/2f950/20200502_01_mysql_page_primary_key.png 1600w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/f0e614dffb5dacb4954a7493fb7c7665/f570d/20200502_01_mysql_page_primary_key.png&quot;
+          alt=&quot;20200502 01 mysql page primary key&quot;
+          title=&quot;20200502 01 mysql page primary key&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Với ví dụ 1, thì user&lt;em&gt;id được gắn là khoá chính. Nên dữ liệu sẽ được sắp xếp theo thứ tự của user&lt;/em&gt;id. Do đó mà thông tin lấy được từ user_characters khả năng cao sẽ được nằm trong 1 page. Mà nếu dữ liệu được nằm trong 1 page thì chắc chắn I/O sẽ được giảm mạnh, và hiệu suất query sẽ tốt hơn.&lt;/p&gt;
+&lt;p&gt;Nhưng với ví dụ 2 thì hoàn toàn khác. Lúc này khoá chính của chúng ta là id. Nên việc dữ liệu tất cả nhân vật mà user_id = 41234 đang nắm giữ khả năng cao sẽ nằm rải rác trên nhiều page khác nhau. Kết quả là I/O sẽ tăng và hiệu năng query sẽ giảm đi rất là nhiều.&lt;/p&gt;
+&lt;p&gt;Chính vì vậy, với nhiều dữ liệu sử dụng đồng thời như ví dụ trên thì chúng ta cố gắng sắp xếp nó cùng vào 1 page nhé.&lt;/p&gt;
+&lt;h2 id=&quot;kết-luận&quot;&gt;&lt;a href=&quot;#k%E1%BA%BFt-lu%E1%BA%ADn&quot; aria-label=&quot;kết luận permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Kết luận&lt;/h2&gt;
+&lt;p&gt;Hôm nay thế thôi nhỉ. Để hôm khác mình sẽ bổ sung thêm(Tại ngại vẽ hình). Hi vọng qua bài này sẽ giúp ích mọi người trong quá trình thiết kế cơ sở dữ liệu sao cho hiệu năng tốt nhất.&lt;/p&gt;
+&lt;p&gt;Chúc mọi người cuối tuần vui vẻ.&lt;/p&gt;
+&lt;p&gt;==============&lt;/p&gt;
+&lt;p&gt;Để nhận thông báo khi có bài viết mới nhất thì các bạn có thể like fanpage của mình ở bên dưới nhé:&lt;/p&gt;
+&lt;p&gt;→→→ &lt;a href=&quot;https://www.facebook.com/669339543503374&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Nghệ thuật Coding Fanpage Facebook&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Ginco đã sử dụng và tối ưu Cloud Functions như thế nào]]></title><description><![CDATA[Hôm nay mình chia sẻ đến mọi người 1 case study khá hay mà Ginco đã thực hiện để quản lí giao dịch trong Blockchain bằng cách sử dụng hệ sinh thái Firebase.]]></description><link>https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</link><guid isPermaLink="false">https://nghethuatcoding.com2019/08/03/ginco-da-su-dung-va-toi-uu-cloud-functions-nhu-the-nao</guid><pubDate>Sat, 03 Aug 2019 14:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Xin chào mọi người. Dạo này ăn hành nhiều quá thành ra không có thời gian viết bài.&lt;/p&gt;
 &lt;p&gt;Hôm nay mình chia sẻ đến mọi người 1 case study khá hay mà &lt;a href=&quot;https://ginco.io/en/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Ginco&lt;/a&gt; đã thực hiện để quản lí giao dịch trong Blockchain bằng cách sử dụng hệ sinh thái Firebase.&lt;/p&gt;
 &lt;p&gt;Gần đây công ty mình cũng bắt đầu đưa Firebase vào hệ thống. Đúng quả thật dùng Firebase xong thấy yêu nó hẳn. Nó quả thực rất mạnh và cũng khá rẻ. Nên thời gian tới mình sẽ tập trung viết nhiều bài hơn nữa về Firebase để mọi người có cái nhìn tổng quan hơn về nó.&lt;/p&gt;
 &lt;p&gt;Bây giờ chúng ta cùng nhau tìm hiểu xem Ginco đã sử dụng Firebase để xử lí các bài toán liên quan đến giao dịch Blockchain như thế nào.&lt;/p&gt;
@@ -2499,7 +2635,7 @@ END;
   &gt;
     &lt;span
     class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 48.87323943661972%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N+mxAAAACXBIWXMAAAsSAAALEgHS3X78AAABZUlEQVQoz4WRjUrDMBSF9yi6tc3NTdKkaZJ2zdqudT9u+IM6RVRQ8P3fwdiiTEGEw+FyuQfO5ZuIFJDFqQQuSBDjcRCBGdD/NZEKGYu1ZkphkJQ0FYAYUZwhCx6FI/pXOJW0Y7wkUFi12ix1iiUhLse6FgsvuYA4OU3INCge/HdYmSwzynt7tmq63s/LXGBUlmAtkTJyFqqK5Tk4R41lQKOj2hkzu61bdQ+Pt6/vLxcXW1/o9bo93O2fny7vD/vrq+7uxi0b5QouFQAehyUaRiUmKcSGgUgipZivnTZKudzMbabF59sYhc4EpsP8FdZazAnsm8Vhd37b9QXHytuurzOrZFnoqtCah7sQCwgS+PmzzsUMTja7/u39pd+0yghfsYWn1Zw2nrY1ao3e8806Cz/XC9E26VmXLlvNBPkMO5eNxUYkgVBAHRwH5iMtNmDDL8dhOck0j5OTsdhYJtQ71q/l9xyGD+A3bRRbjoaVAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    style=&quot;padding-bottom: 48.87323943661972%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAACXBIWXMAAAsSAAALEgHS3X78AAABnklEQVQoz5WSX2+bMBTF+SZbwx9jGxtjMAQIgSYpbaR2W5VpmpaHStv3/wxnFzqqduke9nB0bCHf+7uH6ykdg4sASjMkKkKSRJBJCCEDsHj1RjH3X/xf8nTKIWUImwkYw5FOSmNoxSCET838ufjk7xVgfzXxNBEOIsGaMZTO4DAOsIqjiuhuBbouwabVRM8QRFcISRFbka/Iry7IZ8I0NzB5iqZ12O87DLsW63WOhKKoqhiuYEQdwLkYdS1h7dScoyjEO4RGori7hdsP+Pb9EU+/zri/H9FUFjeHLU6nI84/HvCV/POna5y+OPRbg6qU1IRd5OqlRFhIouQRNA/h6KxZQHlKtF0JWxB9maOoHTKr6NHz42nsaeT41ciTPJs953fsWpzuRjwOA0oqWjcFhuuWotBQFRWbCmZyfjQVW/yCMLMJfPYRN8cdnn6esRt7mEKhbQT9DI6m5ti2Av1GECHdG4nxYOYMu02CbaewGzT63tK6MSLMFVxpCN2f93HuRB2nVVn2cdHyfVmjF/+zXjOhoTGC8MObHF6f/1e/ASqTM1IkH+vrAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
   &gt;&lt;/span&gt;
   &lt;picture&gt;
         &lt;source
