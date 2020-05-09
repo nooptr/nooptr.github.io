@@ -1,4 +1,228 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nghệ Thuật Coding]]></title><description><![CDATA[Chia sẻ những kinh nghiệm, kiến thức, các case study giúp mọi người có thể tạo ra những service chuyên nghiệp hơn]]></description><link>https://nghethuatcoding.com</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 03 May 2020 01:50:08 GMT</lastBuildDate><item><title><![CDATA[Đào sâu về MySQL]]></title><description><![CDATA[Hầu như ai cũng đã từng và đang dùng MySQL nhưng mà cũng có nhiều thứ mà ít ai biết về MySQL. Nên hôm nay mình sẽ đào sâu về nó để chỉ cho mọi người biết nhé ...]]></description><link>https://nghethuatcoding.com2020/05/02/dao-sau-ve-mysql</link><guid isPermaLink="false">https://nghethuatcoding.com2020/05/02/dao-sau-ve-mysql</guid><pubDate>Sat, 02 May 2020 23:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Hôm nay tình cờ đọc được 1 quyển sách về MySQL thấy khá hay nên muốn chia sẻ lại với mọi người những cái mình đã học được.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Nghệ Thuật Coding]]></title><description><![CDATA[Chia sẻ những kinh nghiệm, kiến thức, các case study giúp mọi người có thể tạo ra những service chuyên nghiệp hơn]]></description><link>https://nghethuatcoding.com</link><generator>GatsbyJS</generator><lastBuildDate>Sat, 09 May 2020 09:25:14 GMT</lastBuildDate><item><title><![CDATA[Toàn tập về startup - Burn Rate]]></title><description><![CDATA[Hôm nay mình chia sẻ cho mọi người 1 số kiến thức cơ bản về startup, đặc biệt là 1 số khái niêm cơ bản về nguồn tiền trong startup...]]></description><link>https://nghethuatcoding.com2020/05/09/toan-tap-ve-startup-burnrate</link><guid isPermaLink="false">https://nghethuatcoding.com2020/05/09/toan-tap-ve-startup-burnrate</guid><pubDate>Sat, 09 May 2020 12:20:30 GMT</pubDate><content:encoded>&lt;p&gt;Hôm nay mình chia sẻ cho mọi người 1 số kiến thức cơ bản về startup, đặc biệt là 1 số thuật ngữ cơ bản về nguồn tiền trong startup, các từ ngữ hay dùng giữa nhà đầu tư và nhà khởi nghiệp.
+Khi nào thì cần thêm vốn đầu tư…&lt;/p&gt;
+&lt;p&gt;Mình sẽ cố gắng chia sẻ theo nhiều bài nhỏ. Ai đọc cũng có thể hiểu được.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;/2020/05/09/toan-tap-ve-startup-burnrate&quot;&gt;Burn Rate&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Lợi nhuận (Revenue &amp;#x26; MRR &amp;#x26; SaaS Quick Ratio) &lt;/li&gt;
+&lt;li&gt;Lợi nhuận với tỉ lệ lợi nhuận (Profit &amp;#x26; Margin) &lt;/li&gt;
+&lt;li&gt;Churn Rate &lt;/li&gt;
+&lt;li&gt;Unit Economics (CAC &amp;#x26; LTV) &lt;/li&gt;
+&lt;li&gt;Tỉ lệ tăng trưởng (MoM &amp;#x26; CMGR) &lt;/li&gt;
+&lt;li&gt;Tổng hợp &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Đầu tiên mình sẽ đi vào phần đầu tiên là Burn Rate nhé.&lt;/p&gt;
+&lt;h2 id=&quot;burn-rate-là-gì&quot;&gt;&lt;a href=&quot;#burn-rate-l%C3%A0-g%C3%AC&quot; aria-label=&quot;burn rate là gì permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Burn Rate là gì?&lt;/h2&gt;
+&lt;p&gt;Burn Rate là 1 chỉ số về số tiền mà bạn đã chi tiêu trong tháng. Hay nói cách khác nó còn gọi là tỉ lệ đốt tiền hàng tháng.&lt;/p&gt;
+&lt;p&gt;Burn Rate có 2 loại. Là Gross Burn Rate và Net Burn Rate. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Gross Burn Rate: Số tiền thực tế đã chi tiêu trong 1 tháng (ví dụ tiền trả lương nhân viên, tiền thuê server …)&lt;/li&gt;
+&lt;li&gt;Net Burn Rate: Số tiền 1 tháng nhận được sau khi đã trừ đi doanh thu của tháng đó&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/67e6ef2bc1d9b042e3f74157adebdd4f/2f8d2/Burn_Rate.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 58.82352941176471%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsSAAALEgHS3X78AAABSklEQVQoz4VTi26DMAzk/3+OTki0k0ZLR6tODBivlOZ5cwK0gECNZAVjc7bvjIeVY8x4G/fc32bDN5NcA+8dGD1NowsfMzB7vBFkaSOA0AAnE4NJ6/MHmqZBVVWo63oG7Jnn19MRemPCoJPAb5ricPgEYwyKIin5QRBgv9/jfD6jKAoqwqcdGnDKtMnWXDfK4E5gd3KuPymiOEGa/7l427bIsgx5nkMpBSEEtNYjoIGmhhiXuF4u+E4SVDROQ2CdXOdr6wyiDIA0Xs06Z+whXXdc9RRI3edIpR2/tpvRloW8uaKvowihpSJWEE5ARdU86SjLEnEc43Q6Of4s8HNtpqK8JO6DtktGiAnR4O8+kBFnNvoVRdj5Po7HI8IwxO12m468tTZ9ITv2nfjthHK3sqNL6cRY7uCbxd4SwKwKNONwHXT9N1t/9+rwH9IVr6ERGxF6AAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/67e6ef2bc1d9b042e3f74157adebdd4f/01472/Burn_Rate.webp 240w,
+/static/67e6ef2bc1d9b042e3f74157adebdd4f/222bd/Burn_Rate.webp 480w,
+/static/67e6ef2bc1d9b042e3f74157adebdd4f/620b9/Burn_Rate.webp 960w,
+/static/67e6ef2bc1d9b042e3f74157adebdd4f/bdd6f/Burn_Rate.webp 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/67e6ef2bc1d9b042e3f74157adebdd4f/0783d/Burn_Rate.png 240w,
+/static/67e6ef2bc1d9b042e3f74157adebdd4f/782f4/Burn_Rate.png 480w,
+/static/67e6ef2bc1d9b042e3f74157adebdd4f/f570d/Burn_Rate.png 960w,
+/static/67e6ef2bc1d9b042e3f74157adebdd4f/2f8d2/Burn_Rate.png 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/67e6ef2bc1d9b042e3f74157adebdd4f/f570d/Burn_Rate.png&quot;
+          alt=&quot;Burn Rate&quot;
+          title=&quot;Burn Rate&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Thông thường khi mà nói đến Burn Rate tức là nói đến Net Burn Rate nhé. Công thức tính Net Burn Rate sẽ được tính như sau:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Net Burn Rate = Gross Burn Rate - Revenue (doanh thu 1 tháng)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ví dụ:
+Tổng số tiền chi trong 1 tháng hết 1000\$. Số tiền doanh thu kiếm được tháng đó được 200\$.
+-&gt; Vậy Net Burn Rate = 1000 - 200 = 800$&lt;/p&gt;
+&lt;h2 id=&quot;burn-rate-với-huy-động-vốn-có-liên-quan-gì&quot;&gt;&lt;a href=&quot;#burn-rate-v%E1%BB%9Bi-huy-%C4%91%E1%BB%99ng-v%E1%BB%91n-c%C3%B3-li%C3%AAn-quan-g%C3%AC&quot; aria-label=&quot;burn rate với huy động vốn có liên quan gì permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Burn Rate với huy động vốn có liên quan gì?&lt;/h2&gt;
+&lt;p&gt;Burn Rate với huy động vốn có liên quan như bảng dưới đây.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/635ca9549f0003b172299c3189664335/2f8d2/huy_dong_von2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 58.82352941176471%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAACXBIWXMAAAsSAAALEgHS3X78AAABxUlEQVQoz32Ta2/aMBSG8/9/Sj9PU/etq/ZhKkOqUmAU0kAupeQOiUlsx84720lot1EiHfly7Mfn8saaz+eYzWawbRtlWUJ/XdcZu/Zd8us9K01TEEKMUUr/Ao6XLq3HkTFm7kkpzZ6lN669fGn9ER6EIZ5XKwghemDTNIZ+LSLt11Hos93gl7L3bTKGB58M57oe+FlEHx94Xq3hed67bxiXUYOviwJC9gEYoLaqqtC27X9QOcynwQnbnJt501AwruaSY/FG8G15AGv7LE0NsyzDYrkEZ3QM7ZzyCLxzjpio1ETL4fs+Jr+m8N01pm5sgFwMwJZTFI3A95cKVHSomThDdGJjrX64JR68ChUVJr00SVSEDPauxu3v4h0oFXBfctw8ZoirFm/KYiJQsQ5cKUEO6DunxE8FTEmL7KT8NcXxxHD/UuLLvAATg2y46l56JJi4KeIDgR8V2O5zeMr0GEQ5cuW3/QJOTFAQhqSkiA41jk0LJ6nxFJamhlrLVl8rRe/6kOv6hN3uFdvNRnV1iyjaK8kw49cl6BumSqF0l+cZwsDHaxggUSXQ0rL+lcGnv1rfq7MCdDO1jBzHwWq9huu6Ril/AJ1NoQxwHREVAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/635ca9549f0003b172299c3189664335/01472/huy_dong_von2.webp 240w,
+/static/635ca9549f0003b172299c3189664335/222bd/huy_dong_von2.webp 480w,
+/static/635ca9549f0003b172299c3189664335/620b9/huy_dong_von2.webp 960w,
+/static/635ca9549f0003b172299c3189664335/bdd6f/huy_dong_von2.webp 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/635ca9549f0003b172299c3189664335/0783d/huy_dong_von2.png 240w,
+/static/635ca9549f0003b172299c3189664335/782f4/huy_dong_von2.png 480w,
+/static/635ca9549f0003b172299c3189664335/f570d/huy_dong_von2.png 960w,
+/static/635ca9549f0003b172299c3189664335/2f8d2/huy_dong_von2.png 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/635ca9549f0003b172299c3189664335/f570d/huy_dong_von2.png&quot;
+          alt=&quot;huy dong von2&quot;
+          title=&quot;huy dong von2&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Đại đa số với giai đoạn đầu của startup thì tỉ lệ Burn Rate đều khá cao (vì hầu như chưa có doanh thu).&lt;/p&gt;
+&lt;p&gt;Khoản phải chi lớn hơn rất nhiều so với khoản thu được nên dẫn đến tiền vốn cũng càng ngày càng ít đi.
+Sau khi gần hết tiền thì việc huy động vốn là vô cùng quan trọng.&lt;/p&gt;
+&lt;p&gt;Giai đoạn tiếp theo sau khi bắt đầu có doanh thu thì lúc này Burn Rate dần dần tiến đến 0. Và khi có lợi nhuận thì Burn Rate &gt; 0&lt;/p&gt;
+&lt;p&gt;Mặc dù đã có lãi nhưng để tăng trưởng nhanh hơn nữa thì nhiều công ty startup vẫn tiếp tục huy động vốn.&lt;/p&gt;
+&lt;p&gt;Sau khi đã nắm bắt được tỉ lệ Burn Rate thì từ đó có thể biết được công ty của chúng ta sẽ kéo dài được bao nhiêu tháng. Công thức đơn giản sẽ như sau:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Số tháng có thể kéo dài = Tiền còn lại trong tài khoản ngân hàng / Net Burn Rate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&quot;burn-rate-với-doanh-thu-hàng-tháng&quot;&gt;&lt;a href=&quot;#burn-rate-v%E1%BB%9Bi-doanh-thu-h%C3%A0ng-th%C3%A1ng&quot; aria-label=&quot;burn rate với doanh thu hàng tháng permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Burn Rate với doanh thu hàng tháng&lt;/h2&gt;
+&lt;p&gt;Burn Rate và doanh thu có quan hệ như sau:&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e25d8139fc587195012cac8b5ba11951/2f8d2/Burn%20Rate%20vs%20Revenue.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 39.705882352941174%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAYAAAD5nd/tAAAACXBIWXMAAAsSAAALEgHS3X78AAABU0lEQVQoz11Si27DIAzk/39v06Rq6qY26fIGAgGS8LgZEqndkBwTnw13NiwBCGQ+b84VU0KMFKdYfIaRU1JMILjk57r4itGH9XzG2+cdH98P3B4N2mHC5gP04vB+rXCtO9Q/Leqmg1BLKe5GSViNy63BtWrQjxz9JBCIBZtnib5tMAsOPk2QUpQiv3vwcYDgU4lrpTK9gjlrIQXlUo3WGiEExBAKxlJ60XpS995T0lNs07Zwbi3yPLGP8ahZSfflqwLXtrDzdChrh5EkEGWhMJItdiV2Gyz5UcwQ2kDpBTP5gdqjFgtzYlwZaOOgzArtdhi3gZl1Lz1quSrebp4Y5NsSKvqfpCpscl8HLuEI34nZnfot6ZK8LJ0xTrxgLJ4T8/GYmCFpXIhDGo5J57bkyZfJ5imThRM7pEdkYtmzc+Av9u8d0CY9A0cs/c3Pl+0hld7+AmM3bk258UMgAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/e25d8139fc587195012cac8b5ba11951/01472/Burn%20Rate%20vs%20Revenue.webp 240w,
+/static/e25d8139fc587195012cac8b5ba11951/222bd/Burn%20Rate%20vs%20Revenue.webp 480w,
+/static/e25d8139fc587195012cac8b5ba11951/620b9/Burn%20Rate%20vs%20Revenue.webp 960w,
+/static/e25d8139fc587195012cac8b5ba11951/bdd6f/Burn%20Rate%20vs%20Revenue.webp 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/e25d8139fc587195012cac8b5ba11951/0783d/Burn%20Rate%20vs%20Revenue.png 240w,
+/static/e25d8139fc587195012cac8b5ba11951/782f4/Burn%20Rate%20vs%20Revenue.png 480w,
+/static/e25d8139fc587195012cac8b5ba11951/f570d/Burn%20Rate%20vs%20Revenue.png 960w,
+/static/e25d8139fc587195012cac8b5ba11951/2f8d2/Burn%20Rate%20vs%20Revenue.png 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/e25d8139fc587195012cac8b5ba11951/f570d/Burn%20Rate%20vs%20Revenue.png&quot;
+          alt=&quot;Burn Rate vs Revenue&quot;
+          title=&quot;Burn Rate vs Revenue&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Từ bảng trên ta có thể thấy được, doanh thu càng lớn thì tỉ lệ Burn Rate càng ngày càng thấp đi. Và khi nào có lãi thì tỉ lệ Burn Rate sẽ nhỏ hơn 0.&lt;/p&gt;
+&lt;p&gt;Về cơ bản các công ty startup đều nhắm đến sự tăng trưởng nhanh. Trong khi doanh thu không cao, càng ngày càng thâm hụt.
+Và khi này tỉ lệ Burn Rate được gọi là Default Dead (mặc định chết).&lt;/p&gt;
+&lt;p&gt;Chính vì vậy, chúng ta cần nắm bắt rõ bản thân chúng ta đang ở giai đoạn nào? “Default Dead” (Mặc định là chết) hay “Default Alive” (mặc định là sống).
+Và cần phải nhanh chóng đưa bản thân mình đến trạng thái “Default Alive” càng sớm càng tốt.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 960px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/e902ab75f92485e6b4e4eb40986b61f4/2f8d2/y-combinator.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 56.470588235294116%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAAAsSAAALEgHS3X78AAAC2UlEQVQoz22SWUiUYRSGf52Z30az1LHMBaVccUxTSUrbbZnCLMstq5suEkEwCnOcLLOZchm3cMsILDIFu9AWtQtxNAoxIouiokxNU0gw8aKEFJ9+/yEi6sD3fYfvvO97DrxHEO1UiHZKFEpbHBxE3J3VxPi5sC/SG083J6mmkP7tEAQB/8A16PU5NDXdoaOjnebmJnJz9QQE+Mt1O0lLWLxEUYFaeg9t8MGwN4BHhhRaDMfJiQtFs9wqlpmZwczMDP+LHz++c+pUloyTBW1VCrxd1JzR+dGTF8d0q5Gfb7qYstwiyMsZ3T6dTJyenqa3t5e+vj4GBgbo7++X89+RnJyEIIoqFNKEPhp70qI86C5I5GVVBs9K0/l6r5z4TVpuNNyUCRMTE0xOTv413cLCAvPz83Le3v7wj6D7cjVl+8N4mp/AeKuZTzfz+dZWwRFdDAUmk0wYGxuTJxsZGWF8fJzBwUGGh4eZmpqS642NjVZBcYmSpWqRuyd38visjqGGHJ6XZ/GhRk9WWhwVVVUyYW5ujqGhIQY/fpQFF4VHR0fl2uzsLBER6xBUKhX2askdhQ3bfF1pTAnhiTGZ19ey+dxk5sTBbWhDQ0lKSqCnx/KPIT+lJt2WbiIjI6ymiKpFlyVBWxt8NY40pK7lWqqWtuyDdJkzCfX1tAKlYythNm2IpEifQX1dDeaSIo4dTSVEG4Srxtm6Nr/3x8tNg4eTA6YD4XSe3k3tYS33cxM5FB3GCo0TSqWNBLYh0FHgVfoy3j1+wNunnbzvbeX78AvKjAZrYz9vD2LXr2VHeBArXRxxdXLkXNoevjyoo+VKFhlH4qkym4iJCMFzlRurJXx0iA8xG6PYsjmanbFb2bNrO8HBgdjbL0GoryylurSYyuJCTMaL5OXlcTbXwEtLJzXlxdxuqOd5n4XmG7Xcvl6L6bKJwpJSKqqLKK8xUllXyNX6IgrNl7hw/jy/ADVSCQwSzbcxAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/e902ab75f92485e6b4e4eb40986b61f4/01472/y-combinator.webp 240w,
+/static/e902ab75f92485e6b4e4eb40986b61f4/222bd/y-combinator.webp 480w,
+/static/e902ab75f92485e6b4e4eb40986b61f4/620b9/y-combinator.webp 960w,
+/static/e902ab75f92485e6b4e4eb40986b61f4/bdd6f/y-combinator.webp 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/e902ab75f92485e6b4e4eb40986b61f4/0783d/y-combinator.png 240w,
+/static/e902ab75f92485e6b4e4eb40986b61f4/782f4/y-combinator.png 480w,
+/static/e902ab75f92485e6b4e4eb40986b61f4/f570d/y-combinator.png 960w,
+/static/e902ab75f92485e6b4e4eb40986b61f4/2f8d2/y-combinator.png 1360w&quot;
+          sizes=&quot;(max-width: 960px) 100vw, 960px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/e902ab75f92485e6b4e4eb40986b61f4/f570d/y-combinator.png&quot;
+          alt=&quot;y combinator&quot;
+          title=&quot;y combinator&quot;
+          loading=&quot;lazy&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&quot;làm-thế-nào-để-giảm-burn-rate-xuống&quot;&gt;&lt;a href=&quot;#l%C3%A0m-th%E1%BA%BF-n%C3%A0o-%C4%91%E1%BB%83-gi%E1%BA%A3m-burn-rate-xu%E1%BB%91ng&quot; aria-label=&quot;làm thế nào để giảm burn rate xuống permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Làm thế nào để giảm Burn Rate xuống?&lt;/h2&gt;
+&lt;p&gt;Trong phần lớn startup thì chi phí nhân sự (tiền lương cho nhân viên) đang chiếm phần lớn Burn Rate. Do đó để giảm được Burn Rate thì đơn giản nhất là cần giảm chi phí này xuống mức có thể.
+Cần tối ưu hoá tài nguyên con ngừời trong công ty, không nên tuyển dụng quá nhiều. Hoặc có thể thuê tài nguyên bên ngoài để giảm chi phí.&lt;/p&gt;
+&lt;p&gt;Giám đốc của Y Combinator đã cảnh báo rằng, đa số nhà sáng lập trẻ thường có xu hướng tuyển thêm rất nhiều người. Bởi vì như thế mới giống 1 công ty.
+Nên mọi người hãy chú ý nhé. Biết tận dụng tốt tài nguyên trong công ty là điều vô cùng quan trọng.&lt;/p&gt;
+&lt;h2 id=&quot;tuy-nhiên-tỉ-lệ-burn-rate-cao-không-có-nghĩa-là-xấu&quot;&gt;&lt;a href=&quot;#tuy-nhi%C3%AAn-t%E1%BB%89-l%E1%BB%87-burn-rate-cao-kh%C3%B4ng-c%C3%B3-ngh%C4%A9a-l%C3%A0-x%E1%BA%A5u&quot; aria-label=&quot;tuy nhiên tỉ lệ burn rate cao không có nghĩa là xấu permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Tuy nhiên tỉ lệ Burn Rate cao không có nghĩa là xấu&lt;/h2&gt;
+&lt;p&gt;Bản thân việc Burn Rate cao thì không phải là xấu. Nhưng vấn đề ở đây là: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tiền vốn không còn nhưng mà Burn Rate thì vẫn cao&lt;/li&gt;
+&lt;li&gt;Burn Rate cao nhưng mà vẫn không đạt được milestone đã đề ra&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Đặc biệt là trường hợp thứ 2. Vì nếu trường hợp này xảy ra thì việc huy động vốn lần tiếp theo vô cùng khó, hoặc có thể sẽ mất khá nhiều thời gian mới kêu gọi vốn được.&lt;/p&gt;
+&lt;p&gt;Tuy nhiên nếu mà quá để ý đến Burn Rate thì có khả năng sẽ làm tốc độ phát triển của dự án giảm xuống. Nên hãy cân bằng nó cho tốt nhé.&lt;/p&gt;
+&lt;p&gt;==============&lt;/p&gt;
+&lt;p&gt;Để nhận thông báo khi có bài viết mới nhất thì các bạn có thể like fanpage của mình ở bên dưới nhé:&lt;/p&gt;
+&lt;p&gt;→→→ &lt;a href=&quot;https://www.facebook.com/669339543503374&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Nghệ thuật Coding Fanpage Facebook&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Đào sâu về MySQL]]></title><description><![CDATA[Hầu như ai cũng đã từng và đang dùng MySQL nhưng mà cũng có nhiều thứ mà ít ai biết về MySQL. Nên hôm nay mình sẽ đào sâu về nó để chỉ cho mọi người biết nhé ...]]></description><link>https://nghethuatcoding.com2020/05/02/dao-sau-ve-mysql</link><guid isPermaLink="false">https://nghethuatcoding.com2020/05/02/dao-sau-ve-mysql</guid><pubDate>Sat, 02 May 2020 23:55:30 GMT</pubDate><content:encoded>&lt;p&gt;Hôm nay tình cờ đọc được 1 quyển sách về MySQL thấy khá hay nên muốn chia sẻ lại với mọi người những cái mình đã học được.&lt;/p&gt;
 &lt;p&gt;Về MySQL thì chắc ai cũng đã từng dùng hay đang dùng nó cho một số dự án từ vài người dùng đến hàng triệu người dùng. Từ các website về blog cho đến các trang thương mại điện tử, các server dành cho game…&lt;/p&gt;
 &lt;p&gt;Với hệ thống nhỏ nhỏ thì chắc chẳng cần quan tâm gì nhiều đến cách hoạt động của nó làm gì cho mệt. Nhưng mà khi hệ thống dã lớn lên, phải xử lí hàng nghìn, hàng triệu queries/s thì việc hiểu rõ được cơ chế hoạt động cũng nó là điều vô cùng quan trọng.&lt;/p&gt;
 &lt;p&gt;Việc master được tất tần tật về MySQL thì vô cùng khó, nhưng mà hiểu được cái gì đó sâu sâu 1 chút thì cũng giúp chúng ta hơn hẳn được nhiều người rồi.&lt;/p&gt;
